@@ -1,0 +1,51 @@
+    
+        <div [formGroup]="ProductForm" *ngIf="productPageType">
+                <div class="rowb">
+                    <mat-form-field class="col-md-3">
+                        <input matInput placeholder="Product" formControlName="product">
+                        <mat-error> Product is required
+                        </mat-error>
+                    </mat-form-field>
+
+                    <mat-form-field class="col-md-3">
+                        <input matInput placeholder="Description" formControlName="description">
+                    </mat-form-field>
+
+
+                    <mat-form-field class="col-md-3">
+                        <input matInput placeholder="Tax Code" formControlName="taxCodeName">
+                        <!-- <mat-select formControlName="taxCodeId" placeholder="Tax Code">
+                            <mat-option *ngFor="let taxcode of taxcodes" [value]="taxcode.id">{{taxcode.name}}</mat-option>
+                        </mat-select> -->
+                    </mat-form-field>
+
+                    <mat-form-field class="col-md-3">
+                        <mat-select formControlName="unitId" placeholder="Unit">
+                            <mat-option *ngFor="let unit of units" [value]="unit.id"> {{unit.name}}</mat-option>
+                        </mat-select>
+                        <mat-error>Unit is required</mat-error>
+                    </mat-form-field>
+
+                </div>
+                <div class="rowb">
+                    
+                    <mat-form-field class="col-md-3">
+                        <input  matInput placeholder="Quantity"  style="text-align: right;" name="num" class="scmnum" formControlName="qty" min="0" type="number">
+                        <mat-error> Quantity is required</mat-error>
+                    </mat-form-field>
+
+                    <amount-component [control]="ProductForm.controls['unitPrice']" 
+                                    [wrapper_class]="'col-md-3'"
+                                    [errorMsg]="'Unit Price is required'"
+                                    [placeHolder]="'Unit Price'"> 
+                    </amount-component>
+
+                    <amount-component [control]="ProductForm.controls['totalPrice']" 
+                                    [wrapper_class]="'col-md-3'" 
+                                    [inputClass]="'readonly'" 
+                                    [errorMsg]="'Total Price is required'"
+                                    [placeHolder]="'Total Price'"> 
+                    </amount-component>
+                   
+                </div>
+        </div>

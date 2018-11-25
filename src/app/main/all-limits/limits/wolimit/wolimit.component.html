@@ -1,0 +1,68 @@
+<div id="product" class="page-layout carded fullwidth inner-scroll">
+    <!-- <ngx-loading [show]="loading1" [config]="{ backdropBorderRadius: '14px' }"></ngx-loading> -->
+    <!-- TOP BACKGROUND -->
+    <div class="top-bg accent"></div>
+    <!-- / TOP BACKGROUND -->
+
+    <!-- CENTER -->
+    <div class="center">
+        <!-- HEADER -->
+        <div class="header accent" fxLayout="row" fxLayoutAlign="space-between center">
+
+            <!-- APP TITLE -->
+            <div fxLayout="row" fxLayoutAlign="start center">
+
+                <button mat-icon-button class="mr-0 mr-sm-16" [routerLink]="'/workOrderLimit'">
+                    <mat-icon>arrow_back</mat-icon>
+                </button>
+
+                <div fxLayout="column" fxLayoutAlign="start start" [@animate]="{value:'*',params:{delay:'100ms',x:'-25px'}}">
+                    <div class="logo-text h1 secondary-text" *ngIf="pageType ==='edit'">
+                        Edit Work Order Limit
+                    </div>
+                    <div class="logo-text h1 secondary-text" *ngIf="pageType ==='new'">
+                        Add Work Order Limit
+                    </div>
+                </div>
+            </div>
+            <!-- / APP TITLE -->
+            <div fxLayout="row" fxLayoutAlign="start start">
+                <button mat-raised-button class="save-product-button mr-12" *ngIf="pageType ==='new' || pageType ==='draft'" (click)="saveWOLimit()">
+                    <span>Save</span>
+                </button>
+                <button mat-raised-button class="save-product-button mr-12" [disabled]="!validateform()"  (click)="addWOLimit()">
+                    <span>Submit</span>
+                </button>
+            </div>
+
+            
+        </div>
+        <!-- / HEADER -->
+        <!-- CONTENT CARD -->
+        <div class="content-card">
+            <!-- CONTENT -->
+            <div class="content">
+                <!-- Add project Form -->
+                <div id="wo-form" [@animate]="{value:'*',params:{duration:'300ms',y:'100px'}}">
+                    <form fxLayout="column" [formGroup]="woLimitForm" class="product w-100-p"  fxFlex>
+                        <mat-tab-group>
+                            <mat-tab label="Facility Definition">
+                            <app-work-order-limit #foFacilityLimittable [data]="workOrder"></app-work-order-limit>
+                        </mat-tab>
+                            <mat-tab label="Debtor Limit Set Up">
+                                <br />
+                                <div class="w-100-p">
+                                    <childlist-table #debtorLimittable [tableConfig]="childTableConfig" [data]="woLimits" [ChildItem]="woLimitItem"></childlist-table>
+                                </div>
+
+                            </mat-tab>
+                        </mat-tab-group>
+                    </form>
+                </div>
+            </div>
+            <!--/ Add project Form -->
+        </div>
+        <!-- / CONTENT -->
+    </div>
+    <!-- / CENTER -->
+</div>

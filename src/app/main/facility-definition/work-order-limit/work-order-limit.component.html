@@ -1,0 +1,164 @@
+<div id="product" class="page-layout carded fullwidth inner-scroll">
+    <!-- <ngx-loading [show]="loading1" [config]="{ backdropBorderRadius: '14px' }"></ngx-loading> -->
+    <!-- TOP BACKGROUND -->
+    <!-- <div class="top-bg accent"></div> -->
+    <!-- / TOP BACKGROUND -->
+
+    <!-- CENTER -->
+    <div class="center">
+        <!-- HEADER -->
+        <!-- <div class="header accent" fxLayout="row" fxLayoutAlign="space-between center" *ngIf="flag ==='fo'">
+                <div fxLayout="row" fxLayoutAlign="start center">
+    
+                    <button mat-icon-button class="mr-0 mr-sm-16" [routerLink]="'/WOLimitFacilityDefinition'">
+                        <mat-icon>arrow_back</mat-icon>
+                    </button>
+                    <div fxLayout="column" fxLayoutAlign="start start" [@animate]="{value:'*',params:{delay:'100ms',x:'-25px'}}">
+                        <div class="logo-text h1 secondary-text" *ngIf="pageType ==='edit'">
+                            Update Work Order Facility Definition
+                        </div>
+                        <div class="logo-text h1 secondary-text" *ngIf="pageType ==='new'">
+                            New Work Order Facility Definition
+                        </div>
+                    </div>
+                </div>
+              
+                <button mat-raised-button class="save-product-button" [disabled]="validate()"
+                    (click)="submitWOFacility()">
+                    <span>Submit</span>
+                </button>
+    
+                <button mat-raised-button class="save-product-button" [disabled]="woLimitForm.invalid || woLimitForm.pristine" *ngIf="pageType ==='edit'"
+                    (click)="saveProduct()">
+                    <span>Save</span>
+                </button>
+            </div> -->
+        <!-- / HEADER -->
+        <!-- CONTENT CARD -->
+        <div class="content-card">
+            <!-- CONTENT -->￼
+
+            <div class="content">
+                <!-- Add project Form -->
+                <div id="wo-form" [@animate]="{value:'*',params:{duration:'300ms',y:'100px'}}">
+                    <form fxLayout="column" [formGroup]="woLimitForm" class="product w-100-p" fxFlex>
+                        <div class="tab-content p-24" fusePerfectScrollbar>
+                            <div class="rowb">
+                                <mat-form-field class="col-md-4">
+                                    <mat-select formControlName="supplierId" placeholder="Supplier Name" required>
+                                        <mat-option *ngFor="let sname of snames" [value]="sname.id">
+                                            {{sname.orgName}}
+                                        </mat-option>
+                                    </mat-select>
+                                    <mat-error>
+                                        Supplier is required
+                                    </mat-error>
+                                </mat-form-field>
+
+                                <mat-form-field class="col-md-4">
+                                    <mat-label>Supplier/Distributor Address</mat-label>
+                                    <textarea rows=1 addresscharpattern matInput placeholder="Supplier/Distributor Address" formControlName="supplierAddress"
+                                        required></textarea>
+                                    <mat-error>
+                                        Supplier Address is required
+                                    </mat-error>
+                                </mat-form-field>
+                                <mat-form-field class="col-md-4">
+                                    <input matInput placeholder="Branch Id" formControlName="branchId" required>
+                                    <mat-error>
+                                        Branch Id is required
+                                    </mat-error>
+                                </mat-form-field>
+                            </div>
+                            <div class="rowb">
+                                <mat-form-field class="col-md-4">
+                                    <input matInput placeholder="Loan Acc No" type="number" [min]=0 formControlName="loanAccNo" required>
+                                    <mat-error>
+                                        Loan Acc No is required
+                                    </mat-error>
+                                </mat-form-field> 
+                                <amount-component [control]="woLimitForm.controls['creditLimit']"  [wrapper_class]="'col-md-4'" [errorMsg]="'Credit Limit is required'"
+                                    [placeHolder]="'Credit Limit'">
+                                </amount-component>
+                                <mat-form-field class="col-md-4">
+                                    <input matInput placeholder="Term" type="number" [min]=0 formControlName="term" required>
+                                    <mat-error>
+                                        Term is required
+                                    </mat-error>
+                                </mat-form-field>
+                            </div>
+                            <div class="rowb">
+                                <mat-form-field class="col-md-4">
+                                    <mat-select formControlName="termPeriodId" placeholder="Term Period">
+                                            <mat-option *ngFor="let termPeriod of termPeriods" [value]="termPeriod.id">
+                                                {{termPeriod.name}}
+                                            </mat-option>
+                                        </mat-select>
+                                    <mat-error>
+                                        Term Period is required
+                                    </mat-error>
+                                </mat-form-field>
+                                <mat-form-field class="col-md-4">
+                                    <input formControlName="effectiveDate" matInput [matDatepicker]="creationdt" placeholder="Effective Date" required>
+                                    <mat-datepicker-toggle matSuffix [for]="creationdt"></mat-datepicker-toggle>
+                                    <mat-datepicker color="accent" #creationdt></mat-datepicker>
+                                </mat-form-field>
+                                <mat-form-field class="col-md-4">
+                                    <input [readonly]="isReadOnly" *ngIf="mode=='view'" formControlName="expiryDate" matInput [matDatepicker]="expiryDate" placeholder="Expiry Date" required>
+                                    <mat-datepicker-toggle  matSuffix [for]="expiryDate"></mat-datepicker-toggle>
+                                    <mat-datepicker  color="accent" #expiryDate></mat-datepicker>
+                                </mat-form-field>
+                            </div>
+                            <div class="rowb">
+                                <mat-form-field class="col-md-4">
+                                    <input matInput placeholder="Advance Payment(%)" type="number" [min]=0 formControlName="advPayment" required>
+                                    <mat-error>
+                                        Advance Payment is required
+                                    </mat-error>
+                                </mat-form-field>
+
+                                <mat-form-field class="col-md-4">
+                                    <input matInput placeholder="Interest Rate(%)" type="number" [min]=0 formControlName="interestRate" required>
+                                    <mat-error>
+                                        Interest Rate is required
+                                    </mat-error>
+                                </mat-form-field>
+
+                                <mat-form-field class="col-md-4">
+                                    <input matInput placeholder="Penalty Charge(%)" type="number" [min]=0 formControlName="penaltyCharge" required>
+                                    <mat-error>
+                                        Penalty Charge is required
+                                    </mat-error>
+                                </mat-form-field>
+
+                            </div>
+                            <div class="rowb">
+                                <mat-form-field class="col-md-4">
+                                    <input matInput placeholder="Service Charge(%)" type="number" [min]=0 formControlName="serviceCharge" required>
+                                    <mat-error>
+                                        Service Charge is required
+                                    </mat-error>
+                                </mat-form-field>
+                                <mat-form-field class="col-md-4">
+                                    <input matInput formControlName="creditPeriod" type="number" [min]=0 placeholder="Credit Period(in days)" required>
+                                    <mat-error>
+                                        Credit Period is required
+                                    </mat-error>
+                                </mat-form-field>
+                                <mat-form-field class="col-md-4">
+                                    <input matInput formControlName="gracePeriod" type="number" [min]=0 placeholder="Grace Period(in days)" required>
+                                    <mat-error>
+                                        Grace Period is required
+                                    </mat-error>
+                                </mat-form-field>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <!--/ Add project Form -->
+        </div>
+        <!-- / CONTENT -->
+    </div>
+    <!-- / CENTER -->
+</div>

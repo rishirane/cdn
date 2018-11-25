@@ -1,0 +1,130 @@
+<div id="product" class="page-layout carded fullwidth inner-scroll">
+        <!-- TOP BACKGROUND -->
+        <div class="top-bg accent"></div>
+        <!-- / TOP BACKGROUND -->
+    
+        <!-- CENTER -->
+        <div class="center">
+            <!-- HEADER -->
+            <div class="header accent" fxLayout="row" fxLayoutAlign="space-between center">
+    
+                <!-- APP TITLE -->
+                <div fxLayout="row" fxLayoutAlign="start center">
+                    <button mat-icon-button class="mr-0 mr-sm-16" [routerLink]="'/compositeLimit'">
+                        <mat-icon>arrow_back</mat-icon>
+                    </button>
+                      <!-- <div class="product-image mr-8 mr-sm-16" [@animate]="{value:'*',params:{delay:'50ms',scale:'0.2'}}">
+                        <img *ngIf="product.images[0]" [src]="product.images[0].url">
+                        <img *ngIf="!product.images[0]" [src]="'assets/images/ecommerce/product-image-placeholder.png'">
+                    </div> -->
+                    <div fxLayout="column" fxLayoutAlign="start start" [@animate]="{value:'*',params:{delay:'100ms',x:'-25px'}}">
+                        <div class="logo-text h1 secondary-text" *ngIf="pageType ==='edit'">
+                            Edit Composite Limit
+                        </div>
+                        <div class="logo-text h1 secondary-text" *ngIf="pageType ==='new'">
+                            Add Composite Limit
+                        </div>
+                    </div>
+                </div>
+                <!-- / APP TITLE -->
+                <div fxLayout="row" fxLayoutAlign="start start">
+                    <button mat-raised-button class="save-product-button mr-12" *ngIf="pageType ==='new' || pageType ==='draft'"
+                    (click)="saveMasterLimit()">
+                    <span>Save</span>
+                </button>
+                <button mat-raised-button class="save-product-button mr-12" [disabled]="validateform()" 
+                    (click)="addMasterLimit()">
+                    <span>Submit</span>
+                </button>
+            </div>
+            </div>
+            
+            <!-- / HEADER -->
+            <!-- CONTENT CARD -->
+            <div class="content-card">
+                <!-- CONTENT -->
+                <div class="content">
+                    <!-- Add project Form -->
+                    <div id="wo-form" [@animate]="{value:'*',params:{duration:'300ms',y:'100px'}}">
+                        <form class="mat-white-bg mat-elevation-z4 p-32 mr-0 mb-24" fxLayout="column" fxLayoutAlign="start" fxFlex
+                            [formGroup]="masterLimitForm">
+                            <div class="rowb">
+                                    <mat-form-field class="col-md-4">
+                                        <mat-select  formControlName="supplierId"  placeholder="Supplier Name" required>
+                                            <mat-option *ngFor="let sname of snames" [value]="sname.id">
+                                                {{sname.orgName}}
+                                            </mat-option>
+                                        </mat-select>
+                                        <mat-error>
+                                            Supplier is required
+                                        </mat-error>
+                                    </mat-form-field>
+                                <mat-form-field class="col-md-4">
+                                    <mat-select formControlName="limitTypeId" (selectionChange)="valueChange($event)" placeholder="Entity Type">
+                                            <mat-option *ngFor="let limitType of limitTypes" [value]="limitType.id">
+                                                {{limitType.name}}
+                                            </mat-option>
+                                        </mat-select>
+                                    <mat-error>
+                                        Limit Type is required
+                                    </mat-error>
+                                </mat-form-field>
+                                <mat-form-field class="col-md-4">
+                                    <input [readonly]="isReadOnly" *ngIf="mode=='view'" matInput placeholder="Total Limit" formControlName="totalLimit" type="number" required>
+                                    <mat-error>
+                                        Total Limit is required
+                                    </mat-error>
+                                </mat-form-field>
+                            </div>
+                            <div class="rowb">
+                                <mat-form-field class="col-md-4">
+                                    <input [readonly]="isReadOnly" *ngIf="mode=='view'" matInput placeholder="Work Order Branch Id" formControlName="woBranchId" type="number" required>
+                                    <mat-error>
+                                        Work Order Branch Id is required
+                                    </mat-error>
+                                </mat-form-field>
+                                <mat-form-field class="col-md-4">
+                                    <input [readonly]="isReadOnly" *ngIf="mode=='view'" matInput placeholder="Work Order Acc No" formControlName="woAccNo"   required>
+                                    <mat-error>
+                                        Work Order Acc No is required
+                                    </mat-error>
+                                </mat-form-field>
+                                <mat-form-field class="col-md-4">
+                                    <input [readonly]="isReadOnly" *ngIf="mode=='view'" matInput placeholder="Work Order Limit" formControlName="woLimit" type="number"  required>
+                                    <mat-error>
+                                        Work Order Limit is required
+                                    </mat-error>
+                                </mat-form-field>
+                            </div>
+                            <div class="rowb">
+                                <mat-form-field class="col-md-4">
+                                    <input [readonly]="isReadOnly" *ngIf="mode=='view'" matInput placeholder="Factoring Branch Id" formControlName="factoringBranchId" type="number"  required>
+                                    <mat-error>
+                                        Factoring Branch Id is required
+                                    </mat-error>
+                                </mat-form-field>
+    
+                                <mat-form-field class="col-md-4">
+                                    <input [readonly]="isReadOnly" *ngIf="mode=='view'" matInput placeholder="Factoring Acc No" formControlName="factoringAccNo" required>
+                                    <mat-error>
+                                        Factoring Acc No is required
+                                    </mat-error>
+                                </mat-form-field>
+    
+                                <mat-form-field class="col-md-4">
+                                    <input [readonly]="isReadOnly" *ngIf="mode=='view'"  matInput placeholder="Factoring Limit" formControlName="factoringLimit" type="number"  required>
+                                    <mat-error>
+                                        Factoring Limit is required
+                                    </mat-error>
+                                </mat-form-field>
+                            </div>
+                            
+                        </form>
+                    </div>
+                </div>
+                <!--/ Add project Form -->
+            </div>
+            <!-- / CONTENT -->
+        </div>
+        <!-- / CENTER -->
+    </div>

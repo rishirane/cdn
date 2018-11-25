@@ -1,0 +1,329 @@
+<div id="product" class="page-layout carded fullwidth inner-scroll">
+    <!-- TOP BACKGROUND -->
+    <div class="top-bg accent"></div>
+    <!-- / TOP BACKGROUND -->
+
+    <!-- CENTER -->
+    <div class="center">
+
+        <!-- HEADER -->
+        <div class="header accent" fxLayout="row" fxLayoutAlign="space-between center">
+
+            <!-- APP TITLE -->
+            <div fxLayout="row" fxLayoutAlign="start center">
+
+                <button mat-icon-button class="mr-0 mr-sm-16" [routerLink]="'/invoices'">
+                    <mat-icon>arrow_back</mat-icon>
+                </button>
+
+                <!-- <div class="product-image mr-8 mr-sm-16" [@animate]="{value:'*',params:{delay:'50ms',scale:'0.2'}}">
+                    <img *ngIf="product.images[0]" [src]="product.images[0].url">
+                    <img *ngIf="!product.images[0]" [src]="'assets/images/ecommerce/product-image-placeholder.png'">
+                </div> -->
+
+                <div fxLayout="column" fxLayoutAlign="start start" [@animate]="{value:'*',params:{delay:'100ms',x:'-25px'}}">
+                    <div class="logo-text h1 secondary-text" *ngIf="pageType ==='edit'">
+                        Update Invoice
+                    </div>
+                    <div class="logo-text h1 secondary-text" *ngIf="pageType ==='new'">
+                        Add Invoice
+                    </div>
+                    <!-- <div class="subtitle secondary-text">
+                        <span>Invoice Detail</span>
+                    </div> -->
+                </div>
+            </div>
+            <!-- / APP TITLE -->
+
+            <div fxLayout="row" fxLayoutAlign="start center">
+                <button mat-raised-button class="save-product-button mr-12" *ngIf="pageType ==='new' || pageType ==='draft'"
+                    (click)="saveInvoice()">
+                    <span>Save</span>
+                </button>
+                <button mat-raised-button class="save-product-button mr-12" [disabled]="validateform()" 
+                    (click)="addInvoice()">
+                    <span>Submit</span>
+                </button>
+            </div>
+        </div>
+        <!-- / HEADER -->
+
+        <!-- CONTENT CARD -->
+        <div class="content-card">
+
+            <!-- CONTENT -->
+            <div class="content">
+                <div id="invoice-form" [@animate]="{value:'*',params:{duration:'300ms',y:'100px'}}">
+                    <form name="InvoiceForm" [formGroup]="InvoiceForm" novalidate 
+                        class="product w-100-p" fxLayout="column" fxFlex>
+
+                        <mat-tab-group>
+
+                            <mat-tab label="Invoice Details">
+
+                                <div class="tab-content p-24 posnrelative" fusePerfectScrollbar>
+
+                                    <div class="rowb">
+                                        <mat-form-field class="col-md-4">
+                                            <mat-label>{{'Invoice.SN' | translate}}</mat-label>
+                                            <input  [readonly]="isReadOnly" matInput placeholder="{{'Invoice.SN' | translate}}"
+                                                formControlName="supplierName">
+                                            <mat-error>
+                                                {{'Invoice.SN' | translate}} {{'Invoice.IR' | translate}}
+                                            </mat-error>
+                                        </mat-form-field>
+
+                                        <mat-form-field class="col-md-4">
+                                            <input [readonly]="editFieldsReadOnly" formControlName="invoiceDate"
+                                                matInput [matDatepicker]="invoiceDate" placeholder="{{'Invoice.IDt' | translate}}">
+                                            <mat-datepicker-toggle matSuffix [for]="invoiceDate"></mat-datepicker-toggle>
+                                            <mat-datepicker color="accent" #invoiceDate></mat-datepicker>
+                                            <mat-error>
+                                                {{'Invoice.IDt' | translate}} {{'Invoice.IR' | translate}}
+                                            </mat-error>
+                                        </mat-form-field>
+
+                                        <mat-form-field class="col-md-4">
+                                            <mat-label>{{'Invoice.InvNo' | translate}}</mat-label>
+                                            <input [readonly]="editFieldsReadOnly" matInput placeholder="{{'Invoice.InvNo' | translate}}"
+                                                formControlName="invoiceNumber">
+                                            <mat-error>
+                                                {{'Invoice.InvNo' | translate}} {{'Invoice.IR' | translate}}
+                                            </mat-error>
+                                        </mat-form-field>
+                                    </div>
+                                    <div class="rowb">
+
+
+                                        <mat-form-field class="col-md-4">
+                                            <mat-select *ngIf="mode=='edit'" formControlName="manufacturerId"
+                                                placeholder="{{'Invoice.Manf' | translate}}">
+                                                <mat-option *ngFor="let mname of mnames" [value]="mname.id">
+                                                    {{mname.orgName}}
+                                                </mat-option>
+                                            </mat-select>
+
+                                            <input [readonly]="editFieldsReadOnly" *ngIf="mode=='view'"  matInput placeholder="{{'Invoice.PONo' | translate}}"
+                                                formControlName="manufacturer">
+
+
+
+                                            <mat-error>
+                                                {{'Invoice.Manf' | translate}} {{'Invoice.IR' | translate}}
+                                            </mat-error>
+                                        </mat-form-field>
+
+
+
+
+                                        <mat-form-field class="col-md-4">
+                                            <mat-label>{{'Invoice.ManfAddr' | translate}}</mat-label>
+                                            <textarea [readonly]="isReadOnly" rows=1 matInput placeholder="{{'Invoice.ManfAddr' | translate}}"
+                                                formControlName="manufacturersAddress"></textarea>
+                                            <mat-error>
+                                                {{'Invoice.ManfAddr' | translate}} {{'Invoice.IR' | translate}}
+                                            </mat-error>
+                                        </mat-form-field>
+                                    </div>
+                                    <div class="rowb">
+
+                                        <mat-form-field class="col-md-4">
+                                            <mat-label>{{'Invoice.PONo' | translate}}</mat-label>
+                                            <mat-select *ngIf="mode=='edit'" formControlName="poNumberId"
+                                                placeholder="{{'Invoice.PONo' | translate}}">
+                                                <mat-option *ngFor="let purchaseorder of purchaseOrders" [value]="purchaseorder.id">
+                                                    {{purchaseorder.poNumber}}
+                                                </mat-option>
+                                            </mat-select>
+                                            <input [readonly]="editFieldsReadOnly" *ngIf="mode=='view'"  matInput placeholder="{{'Invoice.PONo' | translate}}"
+                                                formControlName="poNumber">
+                                            <mat-error>
+                                                {{'Invoice.PONo' | translate}} {{'Invoice.IR' | translate}}
+                                            </mat-error>
+                                        </mat-form-field>
+
+                                        <mat-form-field class="col-md-4">
+                                            <input [readonly]="isReadOnly" formControlName="poDate" matInput [matDatepicker]="poDate"
+                                                placeholder="{{'Invoice.PODt' | translate}}">
+                                            <mat-datepicker-toggle matSuffix [for]="poDate"></mat-datepicker-toggle>
+                                            <mat-datepicker color="accent" #poDate></mat-datepicker>
+                                            <mat-error>
+                                                {{'Invoice.PODt' | translate}} {{'Invoice.IR' | translate}}
+                                            </mat-error>
+                                        </mat-form-field>
+                                    </div>
+                                    <div class="rowb">
+
+                                        <mat-form-field class="col-md-4">
+                                            <mat-label>{{'Invoice.CN' | translate}}</mat-label>
+                                            <mat-select *ngIf="mode=='edit'" formControlName="challanId"
+                                                placeholder="{{'Invoice.CN' | translate}}">
+                                                <mat-option *ngFor="let challan of challans" [value]="challan.id">
+                                                    {{challan.challanNumber}}
+                                                </mat-option>
+                                            </mat-select>
+                                            <input *ngIf="mode=='view'" [readonly]="isReadOnly" matInput placeholder="{{'Invoice.CN' | translate}}" formControlName="challanNumber">
+                                            <mat-error>
+                                                {{'Invoice.CN' | translate}} {{'Invoice.IR' | translate}}
+                                            </mat-error>
+                                        </mat-form-field>
+
+                                        <mat-form-field class="col-md-4">
+                                            <input [readonly]="isReadOnly" formControlName="challanDate" matInput [matDatepicker]="challanDate"
+                                                placeholder="{{'Invoice.CNDt' | translate}}">
+                                            <mat-datepicker-toggle matSuffix [for]="challanDate"></mat-datepicker-toggle>
+                                            <mat-datepicker color="accent" #challanDate></mat-datepicker>
+                                            <mat-error>
+                                                {{'Invoice.CNDt' | translate}} {{'Invoice.IR' | translate}}
+                                            </mat-error>
+                                        </mat-form-field>
+
+                                    </div>
+
+
+
+                                    <div *ngIf="mode=='view'" class="readonlydiv"></div>
+
+                                </div>
+
+                            </mat-tab>
+
+                            <mat-tab label="Goods / Service Information">
+                                <div class="w-100-p mat-elevation-z8">
+                                    <div class="pl-32 pr-24 mt-32" style="display: flex">
+                                        <div class="col-md-5"><mat-label>PO Number: &nbsp; &nbsp; {{invoice.poNumber}}</mat-label></div>
+                                        <div class="col-md-5"><mat-label>Challan Number: &nbsp; &nbsp;{{invoice.challanNumber}}</mat-label></div>
+                                    </div> 
+                                    <childlist-table #productlisttable [tableConfig]="childTableConfig" [data]="products"
+                                        [ChildItem]="productItem" (valueChange)="handleValueChange($event)"></childlist-table>
+                                    <div class="w-100-p rowb mr-12 posnrelative" *ngIf="formshow===true" layout="row" layout-align="end-start"
+                                        layout-margin flex style="clear:both;">
+                                        <table style="float:right;" class="ml-30" flex="60">
+                                            <tr class="h-25">
+                                                <th align="right"><span layout="row" layout-align="end-start" style="font-size: 14px;font-weight: bold;">{{'Invoice.GrndTtl'
+                                                        | translate}}</span></th>
+                                                <td class="rowb">
+                                                    <amount-component [control]="InvoiceForm.controls['grandTotal']"
+                                                        [wrapper_class]="'col-md-8'" [errorMsg]="'Grand Total is required'"
+                                                        [inputClass]="'readonly bold-text'" 
+                                                       >
+                                                    </amount-component>
+
+                                                </td>
+                                            </tr>
+                                            <tr class="h-25">
+                                                <th align="right"><span layout="row" layout-align="end-start" style="font-size: 14px;font-weight: bold;">{{'Invoice.GV'
+                                                        | translate}}</span></th>
+                                                <td>
+                                                    <amount-component [control]="InvoiceForm.controls['totalVat']"
+                                                        [wrapper_class]="'col-md-8'" [errorMsg]="'Total Vat is required'"
+                                                        [inputClass]="'bold-text'" 
+                                                       >
+                                                    </amount-component>
+
+                                                </td>
+                                            </tr>
+                                            <tr class="h-25">
+                                                <th align="right"><span layout="row" layout-align="end-start" style="font-size: 14px;font-weight: bold;">{{'Invoice.GTx'
+                                                        | translate}}</span></th>
+                                                <td>
+                                                    <amount-component [control]="InvoiceForm.controls['totalTax']"
+                                                        [wrapper_class]="'col-md-8'" [errorMsg]="'Total Tax is required'"
+                                                        [inputClass]="'bold-text'" 
+                                                       >
+                                                    </amount-component>
+                                                </td>
+                                            </tr>
+                                            <tr class="h-25">
+                                                <th align="right"><span layout="row" layout-align="end-start" style="font-size: 14px;font-weight: bold;">{{'Invoice.AdvPayMt'
+                                                        | translate}}</span></th>
+                                                <td>
+                                                    <amount-component [control]="InvoiceForm.controls['advancePayment']"
+                                                    [wrapper_class]="'col-md-8'"
+                                                    [inputClass]="'bold-text'" 
+                                                    >
+                                                    </amount-component>
+
+                                                </td>
+                                            </tr>
+                                            <tr class="h-25">
+                                                <th align="right"><span layout="row" layout-align="end-start" style="font-size: 14px;font-weight: bold;">{{'Invoice.TtlP'
+                                                        | translate}}</span></th>
+                                                <td>
+                                                    <amount-component [control]="InvoiceForm.controls['totalPayable']"
+                                                        [wrapper_class]="'col-md-8'" [errorMsg]="'Total Payable is required'"
+                                                        [inputClass]="'bold-text'" 
+                                                        >
+                                                    </amount-component>
+
+                                                </td>
+                                            </tr>
+                                            <!-- <tr class="h-25">
+                                                <th align="right"><span layout="row" layout-align="end-start" style="font-size: 14px;font-weight: bold;">{{'Invoice.AiW'
+                                                        | translate}}</span></th>
+                                                <td>
+                                                    <mat-form-field class="col-md-8">
+                                                        <input matInput placeholder="{{'Invoice.AiW' | translate}}"
+                                                            formControlName="amountInWords">
+                                                        <mat-error>
+                                                            {{'Invoice.AiW' | translate}} {{'Invoice.IR' | translate}}
+                                                        </mat-error>
+                                                    </mat-form-field>
+
+                                                </td>
+                                            </tr> -->
+                                        </table>
+                                        <div *ngIf="mode=='view'" class="readonlydiv"></div>
+                                    </div>
+                                </div>
+
+
+                            </mat-tab>
+
+
+
+                            <mat-tab label="Details">
+                                <div class="tab-content p-24" fusePerfectScrollbar>
+
+
+                                    <div class="rowb posnrelative">
+                                        <mat-form-field class="col-md-4">
+                                            <mat-label>{{'Invoice.PrdBy' | translate}}</mat-label>
+                                            <input  matInput placeholder="{{'Invoice.PrdBy' | translate}}"
+                                                formControlName="preparedBy">
+                                            <mat-error>
+                                                {{'Invoice.PrdBy' | translate}} {{'Invoice.IR' | translate}}
+                                            </mat-error>
+                                        </mat-form-field>
+
+                                        <mat-form-field class="col-md-4">
+                                            <mat-label>{{'Invoice.Dsgn' | translate}}</mat-label>
+                                            <input  matInput placeholder="{{'Invoice.Dsgn' | translate}}"
+                                                formControlName="designation">
+                                            <mat-error>
+                                                {{'Invoice.Dsgn' | translate}} {{'Invoice.IR' | translate}}
+                                            </mat-error>
+                                        </mat-form-field>
+                                        <div *ngIf="mode=='view'" class="readonlydiv"></div>
+                                    </div>
+
+                                </div>
+                            </mat-tab>
+
+
+
+
+
+                        </mat-tab-group>
+                    </form>
+
+                </div>
+            </div>
+            <!-- / CONTENT -->
+
+        </div>
+        <!-- / CONTENT CARD -->
+
+    </div>
+    <!-- / CENTER -->
+</div>

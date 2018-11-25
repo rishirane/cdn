@@ -1,0 +1,81 @@
+<div [formGroup]="ProductForm"  *ngIf="productPageType">
+            <div class="rowb" >
+
+                <mat-form-field class="col-md-3">
+                    <input matInput placeholder="{{'Invoice.Prdt' | translate}}" formControlName="product">
+                    <mat-error>
+                        {{'Invoice.Prdt' | translate}} {{'Invoice.IR' | translate}}
+                    </mat-error>
+                </mat-form-field>
+
+                
+
+
+                <mat-form-field class="col-md-3">
+                    <mat-select formControlName="unitId" placeholder="{{'Invoice.U' | translate}}" >
+                        <mat-option *ngFor="let singleunit of units" [value]="singleunit.id">
+                        {{singleunit.name}}
+                        </mat-option>
+                    </mat-select>
+                    <mat-error>
+                        {{'Invoice.U' | translate}} {{'Invoice.IR' | translate}}
+                    </mat-error>
+                </mat-form-field>
+
+                
+
+
+            </div>
+            <div class="rowb" >
+
+                <mat-form-field class="col-md-3">
+                    <input matInput placeholder="{{'Invoice.Qty' | translate}}" class="scmnum" style="text-align: right;" name="num" type="number"  min="0" formControlName="quantity">
+                    <mat-error>
+                        {{'Invoice.Qty' | translate}} {{'Invoice.IR' | translate}}
+                    </mat-error>
+                </mat-form-field>
+
+                <amount-component [control]="ProductForm.controls['unitPrice']" 
+                    [wrapper_class]="'col-md-3'"
+                    [errorMsg]="'Unit Price is required'"
+                    [placeHolder]="'Unit Price'"> 
+                </amount-component>
+
+                <amount-component [control]="ProductForm.controls['totalPrice']" 
+                    [wrapper_class]="'col-md-3'"
+                    [inputClass]="'readonly'" 
+                    [errorMsg]="'Total Price is required'"
+                    [placeHolder]="'Total Price'"> 
+                </amount-component>
+
+            </div>
+            <div class="rowb" >
+
+                <amount-component [control]="ProductForm.controls['vat']" 
+                    [wrapper_class]="'col-md-3'"
+                    [errorMsg]="'VAT is required'"
+                    [placeHolder]="'VAT*'"> 
+                </amount-component>
+
+                <amount-component [control]="ProductForm.controls['tax']" 
+                    [wrapper_class]="'col-md-3'"
+                    [errorMsg]="'TAX is required'"
+                    [placeHolder]="'TAX*'"> 
+                </amount-component>
+                <!-- <mat-form-field class="col-md-3">
+                    <input matInput placeholder="{{'Invoice.V' | translate}}" formControlName="vat">
+                    <mat-error>
+                        {{'Invoice.V' | translate}} {{'Invoice.IR' | translate}}
+                    </mat-error>
+                </mat-form-field> -->
+
+                <!-- <mat-form-field class="col-md-3">
+                    <input matInput placeholder="{{'Invoice.Tx' | translate}}" formControlName="tax">
+                    <mat-error>
+                        {{'Invoice.Tx' | translate}} {{'Invoice.IR' | translate}}
+                    </mat-error>
+                </mat-form-field> -->
+
+            </div>
+        
+</div>

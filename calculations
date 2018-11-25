@@ -1,0 +1,10 @@
+Min[X,E, Sum(9)]
+Min[Z, (F*Y), Sum(10)]
+=A-B
+=C-D
+=G – H – I
+Max [Zero, Current Date – (Invoice Date + Credit Period)]
+Sum(Invoice Amount)
+Min (2,7-8)
+Max[Zero, Current Date – (Invoice Date + Credit Period)]
+Max[Zero, (Available Fund (J) – Effective Credit Limit(G))].

@@ -1,0 +1,27 @@
+<div [formGroup]="ChallanProduct" *ngIf="productPageType">
+  <div class="rowb">
+    <mat-form-field class="col-md-3">
+      <input matInput placeholder=" {{'Challan.Particulars' | translate}}" formControlName="product">
+      <mat-error>
+        {{'Challan.Particulars' | translate}} {{'Challan.IR' | translate}}
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="col-md-3">
+      <input style="text-align:right" matInput placeholder="{{'Challan.Qty' | translate}}" type="number" name="num" class="scmnum text-right" min="0" formControlName="qty">
+      <mat-error>
+        {{'Challan.Qty' | translate}} {{'Challan.IR' | translate}}
+      </mat-error>
+    </mat-form-field>
+
+
+
+    <mat-form-field class="col-md-3">
+      <input matInput placeholder="{{'Challan.U' | translate}}" formControlName="unit">
+      <mat-error>
+        {{'Challan.U' | translate}} {{'Challan.IR' | translate}}
+      </mat-error>
+    </mat-form-field>
+
+  </div>
+</div>

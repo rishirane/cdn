@@ -1,0 +1,68 @@
+<table mat-table [dataSource]="myDataArray" class="mat-elevation-z8">
+
+  <!-- Name Column -->
+  <ng-container matColumnDef="manufacturer">
+    <th mat-header-cell *matHeaderCellDef> Manufacturer Name </th>
+    <td mat-cell *matCellDef="let element"> {{element.manufacturer}} </td>
+  </ng-container>
+
+
+  <!-- Invoice Amount Column -->
+  <ng-container matColumnDef="invAmt">
+    <th mat-header-cell *matHeaderCellDef> Invoice Amount </th>
+    <td mat-cell *matCellDef="let element"> {{element.invAmt}} </td>
+  </ng-container>
+
+
+  <!-- Advance Amount Column -->
+  <ng-container matColumnDef="advAmt">
+    <th mat-header-cell *matHeaderCellDef> Advance Amount </th>
+    <td mat-cell *matCellDef="let element"> {{element.advAmt}} </td>
+  </ng-container>
+
+  <!-- Financed Amount Column -->
+  <ng-container matColumnDef="financedAmt">
+    <th mat-header-cell *matHeaderCellDef> Financed Amount </th>
+    <td mat-cell *matCellDef="let element"> {{element.financedAmt}} </td>
+  </ng-container>
+
+  <!-- Available Limit Column -->
+  <ng-container matColumnDef="avlLimit">
+    <th mat-header-cell *matHeaderCellDef> Available Limit </th>
+    <td mat-cell *matCellDef="let element"> {{element.avlLimit}} </td>
+  </ng-container>
+
+  <!-- Finance Amount Column -->
+  <ng-container matColumnDef="financeAmount">
+    <th mat-header-cell *matHeaderCellDef> Finance Amount </th>
+    <td mat-cell *matCellDef="let element"> {{element.financeAmount}} </td>
+  </ng-container>
+
+
+  <!-- Checkbox Column -->
+  <ng-container matColumnDef="select">
+    <th mat-header-cell *matHeaderCellDef>
+      <mat-checkbox (change)="$event ? masterToggle() : null"
+                    [checked]="selection.hasValue() && isAllSelected()"
+                    [indeterminate]="selection.hasValue() && !isAllSelected()">
+      </mat-checkbox>
+    </th>
+    <td mat-cell *matCellDef="let row">
+      <mat-checkbox (click)="$event.stopPropagation()"
+                    (change)="$event ? selection.toggle(row) : null;"
+                    [checked]="selection.isSelected(row)">
+      </mat-checkbox> <!-- onCheckboxChange($event,row) --> <!-- Add this method on (change) above -->
+    </td>
+  </ng-container>
+  
+  <!-- Symbol Column -->
+  <!-- <ng-container matColumnDef="symbol">
+    <th mat-header-cell *matHeaderCellDef> Symbol </th>
+    <td mat-cell *matCellDef="let element"> {{element.symbol}} </td>
+  </ng-container> -->
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"
+      (click)="selection.toggle(row)">
+  </tr>
+</table>

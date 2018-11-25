@@ -1,0 +1,70 @@
+<div [formGroup]="ShareholderForm" *ngIf="productPageType">
+    <div class="rowb">
+        <mat-form-field class="col-md-4">
+            <input matInput placeholder="Shareholder Name" formControlName="shName">
+            <mat-error>
+                Shareholder Name is required
+            </mat-error>
+        </mat-form-field>
+        <mat-form-field class="col-md-4">
+            <mat-select formControlName="roleId" placeholder="Role">
+                <mat-option *ngFor="let role of roles" [value]="role.id">
+                    {{role.name}}
+                </mat-option>
+            </mat-select>
+            <mat-error>
+                Role is required
+            </mat-error>
+        </mat-form-field>
+        <mat-form-field class="col-md-4">
+            <input matInput placeholder="Percentage of Shareholding"
+                formControlName="perShare" type="number" class="scmnum">
+            <mat-error>
+                Percentage of Shareholding is required
+            </mat-error>
+        </mat-form-field>
+    </div>
+
+    <div class="rowb">
+        <mat-form-field class="col-md-4">
+            <mat-select formControlName="idDocTypeId" placeholder="Identity Document Type">
+                <mat-option *ngFor="let doc of idDocType" [value]="doc.id">
+                    {{doc.name}}
+                </mat-option>
+            </mat-select>
+            <mat-error>
+                Document type is required
+            </mat-error>
+        </mat-form-field>
+        <mat-form-field class="col-md-4">
+            <input matInput placeholder="Document No" formControlName="shDocumentNo">
+            <mat-error>
+                Document number is required
+            </mat-error>
+        </mat-form-field>
+        <mat-form-field class="col-md-4">
+            <mat-select formControlName="issuingCountryId" placeholder="Issuing Country">
+                <mat-option *ngFor="let issuingCountry of countries" [value]="issuingCountry.id">
+                    {{issuingCountry.name}}
+                </mat-option>
+            </mat-select>
+            <mat-error>
+                Issuing Country is required
+            </mat-error>
+        </mat-form-field>
+    </div>
+    <div class="rowb">
+        <div class="col-md-4 mt-24">
+            <mat-checkbox formControlName="shHasValidity">Has validity</mat-checkbox>
+        </div>
+        <mat-form-field class="col-md-4" *ngIf="showExpDt">
+            <input formControlName="shExpiryDate" matInput [matDatepicker]="shExpiryDate"
+                placeholder="Expiry Date">
+            <mat-datepicker-toggle matSuffix [for]="shExpiryDate"></mat-datepicker-toggle>
+            <mat-datepicker color="accent" #shExpiryDate></mat-datepicker>
+            <mat-error>
+                Expiry Date is required
+            </mat-error>
+        </mat-form-field>
+    </div>
+  </div>

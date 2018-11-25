@@ -1,0 +1,39 @@
+<div [formGroup]="BankForm" *ngIf="productPageType">
+    <div class="rowb">
+        <mat-form-field class="col-md-4">
+            <input matInput placeholder="Account Title" formControlName="accountTitle">
+            <mat-error>
+                Account Title is required
+            </mat-error>
+        </mat-form-field>
+        <mat-form-field class="col-md-4">
+            <mat-select formControlName="bankNameId" placeholder="Bank">
+                <mat-option *ngFor="let bankName of bankNames" [value]="bankName.id">
+                    {{bankName.name}}
+                </mat-option>
+            </mat-select>
+            <mat-error>
+                Bank Name is required
+            </mat-error>
+        </mat-form-field>
+        <mat-form-field class="col-md-4">
+            <mat-select formControlName="bankBranchId" placeholder="Bank Branch">
+                <mat-option *ngFor="let bankBranch of bankBranches" [value]="bankBranch.id">
+                    {{bankBranch.name}}
+                </mat-option>
+            </mat-select>
+            <mat-error>
+                Validity Type is required
+            </mat-error>
+        </mat-form-field>
+    </div>
+
+    <div class="rowb">
+        <mat-form-field class="col-md-4">
+            <input matInput placeholder="Account Number" formControlName="accountNumber" type="number" class="scmnum">
+            <mat-error>
+                Account Number is required
+            </mat-error>
+        </mat-form-field>
+    </div>
+  </div>

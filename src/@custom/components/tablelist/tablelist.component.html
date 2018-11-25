@@ -1,0 +1,119 @@
+<div id="scm_table" class="page-layout carded fullwidth inner-scroll">
+
+    <!-- TOP BACKGROUND -->
+    <div class="top-bg accent"></div>
+    <!-- / TOP BACKGROUND -->
+
+    <!-- CENTER -->
+    <div class="center">
+
+        <!-- HEADER -->
+
+        <div class="header accent" *ngIf="tableConfig.isTopHeadRequired" fxLayout="column" fxLayoutAlign="center center"
+            fxLayout.gt-xs="row" fxLayoutAlign.gt-xs="space-between center">
+
+            <!-- APP TITLE -->
+            <div class="logo my-12 m-sm-0" fxLayout="row" fxLayoutAlign="start center">
+                <mat-icon class="logo-icon mr-16" [@animate]="{value:'*',params:{delay:'50ms',scale:'0.2'}}">
+                    shopping_basket
+                </mat-icon>
+                <span class="logo-text h1" [@animate]="{value:'*',params:{delay:'100ms',x:'-25px'}}">
+                    {{tableConfig.topHeadName}}
+                </span>
+            </div>
+            <!-- / APP TITLE -->
+
+            <!-- SEARCH -->
+            <!-- <div class="search-input-wrapper ml-sm-16"
+                 fxFlex="1 0 auto" fxLayout="row" fxLayoutAlign="start center">
+                <label for="search" class="mr-8">
+                    <mat-icon class="secondary-text">search</mat-icon>
+                </label>
+                <mat-form-field floatLabel="never" fxFlex="1 0 auto">
+                    <input id="search" matInput #filter placeholder="Search">
+                </mat-form-field>
+            </div> -->
+            <!-- / SEARCH -->
+
+            <!-- <search-main></search-main> -->
+
+            <button mat-raised-button [routerLink]="tableConfig.addNewClickUrl" class="add-product-button fuse-white my-12 mt-sm-0">
+                <span>{{tableConfig.addNewClickName}}</span>
+            </button>
+
+        </div>
+
+        <!-- / HEADER -->
+
+        <!-- CONTENT CARD -->
+        <div class="content-card">
+            
+            <div *ngIf="dataSource.data.length === 0" class="mt-24" style="text-align:center"><span class="mat-headline">No Data found!</span></div>
+            
+            <mat-table [ngClass]='!isLoadingPassed ? "visible": "hidden"' class="tableData-table" #table [dataSource]="dataSource" matSort [@animateStagger]="{value:'50'}"
+                fusePerfectScrollbar>
+
+                <ng-container *ngFor="let column of columns" [ngSwitch]="column.coloumnType" [matColumnDef]="column.columnDef">
+                    <mat-header-cell *matHeaderCellDef>{{ column.header }}</mat-header-cell>
+                    <ng-container *ngIf="(!column.isColumnHasButtons)">
+                        <ng-container *ngSwitchCase="'amount'">
+                            <mat-cell *matCellDef="let row" class="mat-amount-cell">
+                                <p class="text-truncate">{{ column.cell(row) | SCM_Currency }}</p>
+                            </mat-cell>
+                        </ng-container>
+                        <ng-container *ngSwitchCase="'date'">
+                            <mat-cell *matCellDef="let row">
+                                <p class="text-truncate">{{ column.cell(row) | SCM_Date }}</p>
+                            </mat-cell>
+                        </ng-container>
+                        <ng-container *ngSwitchCase="'value'">
+                            <mat-cell *matCellDef="let row">
+                                <p class="text-truncate">{{ column.cell(row) }}</p>
+                            </mat-cell>
+                        </ng-container>
+                        <ng-container *ngSwitchCase="'status'">
+                            <mat-cell *matCellDef="let row">
+                                <p [ngClass]="{ 'purple-300': (column.cell(row)==='Issued'), 'blue-500': (column.cell(row)==='New'),'orange-500': (column.cell(row)==='Draft'),'green-800' : (column.cell(row)==='Approved'), 'red-500' : (column.cell(row)==='Rejected'),'red-900' : (column.cell(row).indexOf('Rejected By')!=-1) , 'status':true, 'text-truncate':true, 'h6':true, 'p-4':true}">{{ column.cell(row) }}</p>
+                            </mat-cell>
+                        </ng-container>
+                    </ng-container>
+                    <ng-container *ngIf="(column.isColumnHasButtons)">
+                        <mat-cell *matCellDef="let row">
+                            <button type="button" mat-icon-button [matMenuTriggerFor]="moreMenu" aria-label="More"
+                                (click)="$event.stopPropagation()" fxHide.xs>
+                                <mat-icon class="secondary-text">more_vert</mat-icon>
+                            </button>
+                            <mat-menu #moreMenu="matMenu">
+                                <ng-container *ngFor="let columnAction of column.columnActionsButtons">
+                                    <button type="button" mat-menu-item aria-label="toggle done" (click)="onIconClick($event,columnAction,row.id)">
+                                        <mat-icon>{{columnAction.btnIcon}}</mat-icon>
+                                        <span>{{columnAction.btnName}}</span>
+                                    </button>
+
+                                </ng-container>
+                            </mat-menu>
+
+                        </mat-cell>
+                    </ng-container>
+
+                </ng-container>
+
+
+                <mat-header-row *matHeaderRowDef="displayedColumns; sticky:true"></mat-header-row>
+                <ng-container *ngIf="tableConfig.removeRowClick">
+                    <mat-row *matRowDef="let row; columns: displayedColumns;" class="tabrow"></mat-row>
+                </ng-container>
+                <ng-container *ngIf="!tableConfig.removeRowClick">
+                    <mat-row *matRowDef="let row; columns: displayedColumns;" class="tabrow" routerLink='{{tableConfig.rowClickUrl+row.id}}'></mat-row>
+                </ng-container>
+            </mat-table>
+           
+            <mat-paginator [ngClass]='!isLoadingPassed ? "visible": "hidden"' #paginator [length]="dataSource && dataSource.filteredData && dataSource.filteredData.length"
+                [pageIndex]="0" [pageSize]="10" [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+            
+            
+        </div>
+        <!-- / CONTENT CARD -->
+    </div>
+    <!-- / CENTER -->
+</div>

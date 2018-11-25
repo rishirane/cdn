@@ -1,0 +1,81 @@
+<div id="forms" class="page-layout carded fullwidth inner-scroll">
+
+    <!-- TOP BACKGROUND -->
+    <div class="top-bg accent"></div>
+    <!-- / TOP BACKGROUND -->
+
+    <!-- CENTER -->
+    <div class="center">
+
+        <!-- HEADER -->
+        <div class="header accent" fxLayout="row" fxLayoutAlign="space-between center">
+
+            <!-- APP TITLE -->
+            <div fxLayout="row" fxLayoutAlign="start center">
+
+                <button mat-icon-button class="mr-0 mr-sm-16">
+                    <mat-icon>arrow_back</mat-icon>
+                </button>
+                <div fxLayout="column" fxLayoutAlign="start start" [@animate]="{value:'*',params:{delay:'100ms',x:'-25px'}}">
+                    <div class="logo-text h1 secondary-text">
+                        Activate User
+                    </div>
+                </div>
+            </div>
+            <!-- / APP TITLE -->
+        </div>
+        <!-- / HEADER -->
+
+        <!-- CONTENT CARD -->
+        <div class="content-card p-24 mr-24 mb-24 inner-scroll" id="ActiveUserForm" [@animate]="{value:'*',params:{duration:'300ms',y:'100px'}}">
+
+            <!-- CONTENT -->
+            <form class="mat-white-bg" [formGroup]="ActiveUserForm" fxLayout="column" fxLayoutAlign="start" fxFlex="1 0 auto" (ngSubmit)="addUserData()">
+                <h2 fxLayoutAlign="center center">Agreement</h2>
+                <div class="message inner-scroll">
+                    <p>
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis quis bibendum mauris. Mauris vel risus id eros mollis cursus
+                        et a dolor. Sed lectus ex, porta at nibh luctus, bibendum tristique lectus. Nulla est lectus, eleifend
+                        at turpis id, cursus sagittis ligula. Morbi quis lacus vel urna interdum viverra quis non metus.
+                        Nulla elementum tortor sit amet nisl placerat, eu viverra tellus dapibus. Donec libero erat, ultrices
+                        et ligula laoreet, pretium commodo sapien. Duis laoreet feugiat felis, id sagittis nulla semper in.
+                        Donec mollis, mi non vehicula ultricies, elit purus sodales neque, nec efficitur enim elit id quam.
+                        Phasellus elementum venenatis libero, in posuere tortor vehicula a. Aliquam erat volutpat. Donec
+                        rhoncus ligula id dapibus ultrices. Integer pharetra lectus in tincidunt molestie. Curabitur non
+                        odio egestas, efficitur nisl in, commodo nulla. Morbi tristique nibh a purus eleifend, non aliquam
+                        tortor cursus. Aliquam imperdiet tincidunt eros vitae vulputate. Fusce cursus quis risus et
+                        posuere. Sed pulvinar purus vel justo pellentesque sodales. Aliquam erat volutpat. Nam laoreet orci
+                        vel magna ornare imperdiet. Ut sodales, eros id ornare commodo, purus felis dictum sapien, vel venenatis
+                        dolor tortor in ligula. Nunc ac nisl in lorem venenatis ornare vel vel magna. In lacinia at quam
+                        vitae pulvinar. Nunc id tempus nunc. In auctor sodales ipsum ut dignissim. Nam vitae placerat mauris.
+                        Maecenas sit amet quam quam. Proin imperdiet vulputate lobortis. Sed pretium feugiat nibh, nec dictum
+                        elit vehicula non. Etiam porttitor maximus massa.
+                    </p>
+                    <div fxLayout="row" fxLayoutAlign="start start">
+                        <mat-checkbox formControlName="agree">I Agree</mat-checkbox>
+                    </div>
+                    <div fxLayout="row" fxLayoutAlign="center center">
+                        <button mat-raised-button type="button" color="accent" (click)="addUserData()">
+                            <span>Accept</span>
+                        </button>&nbsp;&nbsp;
+                        <button mat-raised-button type="button" color="accent" (click)="cancel()">
+                            <span>Cancel</span>
+                        </button>
+
+
+
+                    </div>
+                </div>
+
+            </form>
+
+            <!-- </div> -->
+            <!-- </div> -->
+            <!-- / CONTENT -->
+
+        </div>
+        <!-- / CONTENT CARD -->
+
+    </div>
+    <!-- / CENTER -->
+</div>

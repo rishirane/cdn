@@ -1,0 +1,589 @@
+<div class="page-layout blank p-24" fusePerfectScrollbar>
+
+    <h2> Fund Requisition Against Factoring </h2>
+
+    <div class="vertical-stepper-wrapper">
+
+        <!-- vertical STEPPER EXAMPLE -->
+        <mat-vertical-stepper class="mat-elevation-z4" [linear]="true">
+
+
+            <!-- <mat-step >
+
+                <form fxLayout="column" [formGroup]="ManufacturerDetails">
+
+                    <ng-template matStepLabel>Start - Select Manufacturer </ng-template>
+
+                    <div fxFlex="1 0 auto" fxLayout="column">
+
+                        <mat-form-field fxFlex="100">
+                            <input readonly matInput placeholder="First name" formControlName="manufacturerName" required>
+                            <mat-error>Manufacturer Select List</mat-error>
+                        </mat-form-field>
+
+
+                    </div>
+
+                    <div class="pt-24" fxLayout="row" fxLayoutAlign="center center">
+                        <button mat-raised-button matStepperNext type="button" color="accent">
+                            Next
+                        </button>
+                    </div>
+                </form>
+
+            </mat-step> -->
+
+
+
+            <mat-step>
+
+                <form fxLayout="column" [formGroup]="ApprovedLimitsDetails">
+
+                    <ng-template matStepLabel>Approved limits</ng-template>
+
+                    <div fxFlex="1 0 auto" fxLayout="row">
+
+                        <mat-form-field fxFlex="100" class="col-md-4">
+                            <input readonly matInput placeholder="Sales Ledger Limit" formControlName="salesLedgerLimit">
+                            <!-- <label readonly matInput>placeholder="Sales Ledger Limit"  </label>   -->
+                            <mat-error>Approved Limit is required!</mat-error>
+                        </mat-form-field>
+
+                        <mat-form-field fxFlex="100" class="col-md-4">
+                            <input readonly matInput placeholder="APR" formControlName="advancePaymentRate_apr" required>
+
+                            <mat-error>APR is required!</mat-error>
+                        </mat-form-field>
+
+                        <mat-form-field fxFlex="100" class="col-md-4">
+                            <input readonly matInput placeholder="Credit Limit" formControlName="creditLimit" required>
+
+                            <mat-error>Credit Limit is required!</mat-error>
+                        </mat-form-field>
+
+                    </div>
+
+                    <!-- <div class="pt-24" fxLayout="row" fxLayoutAlign="center center">
+                        <button class="mr-8" mat-raised-button matStepperPrevious type="button" color="accent">
+                            Previous
+                        </button>
+                        <button mat-raised-button matStepperNext type="button" color="accent">
+                            Next
+                        </button>
+                    </div> -->
+                    <!-- </form>
+
+
+            </mat-step>
+
+            <mat-step >
+
+                <form fxLayout="column" [formGroup]="CurrentPositionDetails">
+
+                    <ng-template matStepLabel>Current Position</ng-template> -->
+
+                    <div fxFlex="1 0 auto" fxLayout="row">
+
+                        <mat-form-field fxFlex="100" class="col-md-4">
+                            <input readonly matInput placeholder="Total Invoice Amount" formControlName="totInvAmt" type="number" required>
+
+                            <!-- <mat-error>Approved Limit is required!</mat-error> -->
+                        </mat-form-field>
+
+                        <mat-form-field fxFlex="100" class="col-md-4">
+                            <input readonly matInput placeholder="Invoice Adjusted" formControlName="invAdj" type="number" required>
+
+                            <!-- <mat-error>Approved Limit is required!</mat-error> -->
+                        </mat-form-field>
+
+                        <mat-form-field fxFlex="100" class="col-md-4">
+                            <input readonly matInput placeholder="SL Balance" formControlName="slBal" required>
+
+                            <!-- <mat-error>Approved Limit is required!</mat-error> -->
+                        </mat-form-field>
+
+                    </div>
+                    <div fxFlex="1 0 auto" fxLayout="row">
+                        <mat-form-field fxFlex="100" class="col-md-4">
+                            <input readonly matInput placeholder="Expired Invoice" formControlName="expInv" required>
+
+                            <!-- <mat-error>Approved Limit is required!</mat-error> -->
+                        </mat-form-field>
+
+                        <mat-form-field fxFlex="100" class="col-md-4">
+                            <input readonly matInput placeholder="Effective Sales Ledger" formControlName="effSalesLedger" required>
+
+                            <!-- <mat-error>Approved Limit is required!</mat-error> -->
+                        </mat-form-field>
+
+                        <mat-form-field fxFlex="100" class="col-md-4">
+                            <input readonly matInput placeholder="Effective SL Limit" formControlName="effSLlimit" required>
+
+                            <!-- <mat-error>Approved Limit is required!</mat-error> -->
+                        </mat-form-field>
+
+                    </div>
+
+                    <div fxFlex="1 0 auto" fxLayout="row">
+                        <mat-form-field fxFlex="100" class="col-md-4">
+                            <input readonly matInput placeholder="Effective Credit Limit" formControlName="effCreditLimit" required>
+
+                            <!-- <mat-error>Approved Limit is required!</mat-error> -->
+                        </mat-form-field>
+
+                        <mat-form-field fxFlex="100" class="col-md-4">
+                            <input readonly matInput placeholder="Loan Balance" formControlName="loanBal" required>
+
+                            <!-- <mat-error>Approved Limit is required!</mat-error> -->
+                        </mat-form-field>
+
+                        <mat-form-field fxFlex="100" class="col-md-4">
+                            <input readonly matInput placeholder="Unallocated Collection" formControlName="unallocatedCollection" required>
+
+                            <!-- <mat-error>Approved Limit is required!</mat-error> -->
+                        </mat-form-field>
+
+                    </div>
+
+                    <div fxFlex="1 0 auto" fxLayout="row">
+                        <mat-form-field fxFlex="100" class="col-md-4">
+                            <input readonly matInput placeholder="Available Fund" formControlName="avlFund" required>
+
+                            <!-- <mat-error>Approved Limit is required!</mat-error> -->
+                        </mat-form-field>
+
+                        <mat-form-field fxFlex="100" class="col-md-4">
+                            <input readonly matInput placeholder="Overdue Invoice" formControlName="overdueInvoice" required>
+
+                            <!-- <mat-error>Overdue Status is required!</mat-error> -->
+
+                        </mat-form-field>
+
+                        <mat-form-field fxFlex="100" class="col-md-4">
+                            <input readonly matInput placeholder="Max Days OD" formControlName="maxDaysOD" required>
+
+                            <!-- <mat-error>Overdue Status is required!</mat-error> -->
+                        </mat-form-field>
+                    </div>
+
+                    <!-- <div class="pt-24" fxLayout="row" fxLayoutAlign="center center">
+                        <button class="mr-8" mat-raised-button matStepperPrevious type="button" color="accent">
+                            Previous
+                        </button>
+                        <button mat-raised-button matStepperNext type="button" color="accent">
+                            Next
+                        </button>
+                    </div> -->
+                    <!-- </form>
+
+
+            </mat-step>
+
+
+            <mat-step >
+
+                <form fxLayout="column" [formGroup]="OverdueStatusDetails">
+
+                    <ng-template matStepLabel>Overdue Status </ng-template> -->
+
+                    <!-- <div fxFlex="1 0 auto" fxLayout="row"> -->
+
+                    <!-- <mat-form-field fxFlex="100" class="col-md-4">
+                            <input readonly matInput placeholder="Overdue Invoice" formControlName="overdueInvoice" required>
+
+                            <mat-error>Overdue Status is required!</mat-error>
+
+                        </mat-form-field> -->
+
+                    <!-- <mat-form-field fxFlex="100" class="col-md-4">
+                            <input readonly matInput placeholder="Effective Credit Limit" formControlName="effectiveCreditLimit" required>
+
+                            <mat-error>Approved Limit is required!</mat-error>
+                        </mat-form-field> -->
+
+                    <!-- <mat-form-field fxFlex="100" class="col-md-4">
+                            <input readonly matInput placeholder="Max Days OD" formControlName="maxDaysOD" required>
+
+                            <mat-error>Overdue Status is required!</mat-error>
+                        </mat-form-field> -->
+
+                    <!-- </div> -->
+
+                    <!-- <div class="pt-24" fxLayout="row" fxLayoutAlign="center center">
+                        <button class="mr-8" mat-raised-button matStepperPrevious type="button" color="accent">
+                            Previous
+                        </button>
+                        <button mat-raised-button matStepperNext type="button" color="accent">
+                            Next
+                        </button>
+                    </div> -->
+                    <!-- </form>
+
+
+            </mat-step>
+
+            <mat-step >
+
+                <form fxLayout="column" [formGroup]="DebtorLimitStatusDetails">
+
+                    <ng-template matStepLabel>Debtor Limit Status</ng-template> -->
+
+                    <div fxFlex="1 0 auto" fxLayout="row">
+                        <mat-form-field fxFlex="100" class="col-md-4">
+                            <input readonly matInput placeholder="Debtor’s Name" formControlName="debtorName" required>
+
+                            <!-- <mat-error>Approved Limit is required!</mat-error> -->
+                        </mat-form-field>
+
+                        <mat-form-field fxFlex="100" class="col-md-4">
+                            <input readonly matInput placeholder="Invoice Discounted" formControlName="invoiceDiscounted" required>
+
+                            <!-- <mat-error>Approved Limit is required!</mat-error> -->
+                        </mat-form-field>
+
+                        <mat-form-field fxFlex="100" class="col-md-4">
+                            <input readonly matInput placeholder="No of OD Invoice" formControlName="noof_OD_Invoice" required>
+
+                            <!-- <mat-error>Approved Limit is required!</mat-error> -->
+                        </mat-form-field>
+
+                        <!-- <mat-form-field fxFlex="100" class="col-md-4">
+                            <input readonly matInput placeholder="SL Limit" formControlName="SL_Limit" required>
+
+                            <mat-error>SL Limit is required!</mat-error>
+                        </mat-form-field> -->
+
+                        <!-- <mat-form-field fxFlex="100" class="col-md-4">
+                            <input readonly matInput placeholder="APR" formControlName="APR" required>
+
+                            <mat-error>APR is required!</mat-error>
+                        </mat-form-field> -->
+
+                    </div>
+
+                    <!-- <div fxFlex="1 0 auto" fxLayout="row"> -->
+                    <!-- <mat-form-field fxFlex="100" class="col-md-4">
+                            <input readonly matInput placeholder="Credit Limit" formControlName="creditLimit" required>
+
+                            <mat-error>Credit Limit is required!</mat-error>
+                        </mat-form-field> -->
+
+                    <!-- <mat-form-field fxFlex="100" class="col-md-4">
+                            <input readonly matInput placeholder="Total Invoice Amount" formControlName="totalInvoiceAmount" required>
+
+                            <mat-error>Total Invoice Amount is required!</mat-error>
+                        </mat-form-field> -->
+
+                    <!-- <mat-form-field fxFlex="100" class="col-md-4">
+                            <input readonly matInput placeholder="Invoice Adjusted" formControlName="invoiceAdjusted" required>
+
+                            <mat-error>Invoice Adjusted is required!</mat-error>
+                        </mat-form-field> -->
+
+                    <!-- </div> -->
+
+                    <!-- <div fxFlex="1 0 auto" fxLayout="row"> -->
+                    <!-- <mat-form-field fxFlex="100" class="col-md-4">
+                            <input readonly matInput placeholder="SL Balance" formControlName="SL_Balance" required>
+
+                            <mat-error>SL Balance is required!</mat-error>
+                        </mat-form-field> -->
+
+                    <!-- <mat-form-field fxFlex="100" class="col-md-4">
+                            <input readonly matInput placeholder="Effective Credit Limit" formControlName="effectiveCreditLimit" required>
+
+                            <mat-error>Effective Credit Limit is required!</mat-error>
+                        </mat-form-field> -->
+
+                    <!-- <mat-form-field fxFlex="100" class="col-md-4">
+                            <input readonly matInput placeholder="Invoice Discounted" formControlName="invoiceDiscounted" required>
+
+                            <mat-error>Approved Limit is required!</mat-error>
+                        </mat-form-field> -->
+
+                    <!-- </div> -->
+
+                    <div fxFlex="1 0 auto" fxLayout="row">
+                        <mat-form-field fxFlex="100" class="col-md-4">
+                            <input readonly matInput placeholder="Finance Amount" formControlName="financeAmount" required>
+
+                            <!-- <mat-error>Approved Limit is required!</mat-error> -->
+                        </mat-form-field>
+
+                        <mat-form-field fxFlex="100" class="col-md-4">
+                            <input readonly matInput placeholder="Payment Received" formControlName="paymentReceived" required>
+
+                            <!-- <mat-error>Approved Limit is required!</mat-error> -->
+                        </mat-form-field>
+
+                        <mat-form-field fxFlex="100" class="col-md-4">
+                            <input readonly matInput placeholder="Loan Balance" formControlName="loanBalance" required>
+
+                            <!-- <mat-error>Approved Limit is required!</mat-error> -->
+                        </mat-form-field>
+
+                    </div>
+
+                    <!-- <div fxFlex="1 0 auto" fxLayout="row"> -->
+                    <!-- <mat-form-field fxFlex="100" class="col-md-4">
+                            <input readonly matInput placeholder="Overdue Invoice Amount" formControlName="overdueInvoiceAmount" required>
+
+                            <mat-error>Approved Limit is required!</mat-error>
+                        </mat-form-field> -->
+
+                    <!-- <mat-form-field fxFlex="100" class="col-md-4">
+                            <input readonly matInput placeholder="No of OD Invoice" formControlName="Noof_OD_Invoice" required>
+
+                            <mat-error>Approved Limit is required!</mat-error>
+                        </mat-form-field> -->
+
+                    <!-- <mat-form-field fxFlex="100" class="col-md-4">
+                            <input readonly matInput placeholder="Max Days OD" formControlName="MaxDaysOD" required>
+
+                            <mat-error>Approved Limit is required!</mat-error>
+                        </mat-form-field> -->
+
+                    <!-- </div> -->
+
+                    <div fxFlex="1 0 auto" fxLayout="row">
+                        <mat-form-field fxFlex="100" class="col-md-4">
+                            <input readonly matInput placeholder="Available Fund" formControlName="availableFund" required>
+
+                            <!-- <mat-error>Approved Limit is required!</mat-error> -->
+                        </mat-form-field>
+
+                        <mat-form-field fxFlex="100" class="col-md-4">
+                            <input readonly matInput placeholder="Refund from Collection" formControlName="refundFromCollection" required>
+
+                            <!-- <mat-error>Approved Limit is required!</mat-error> -->
+                        </mat-form-field>
+
+                        <mat-form-field fxFlex="100" class="col-md-4">
+                            <input readonly matInput placeholder="Available for Factoring" formControlName="availableforFactoring" required>
+
+                            <!-- <mat-error>Approved Limit is required!</mat-error> -->
+                        </mat-form-field>
+
+                    </div>
+
+                    <div class="pt-24" fxLayout="row" fxLayoutAlign="center center">
+                        <!-- <button class="mr-8" mat-raised-button matStepperPrevious type="button" color="accent">
+                            Previous
+                        </button> -->
+                        <button mat-raised-button matStepperNext type="button" color="accent">
+                            Next
+                        </button>
+                    </div>
+                </form>
+
+
+            </mat-step>
+
+
+            <!-- <mat-step>
+
+                <form fxLayout="column" [formGroup]="FundRequest">
+
+                    <ng-template matStepLabel>Fund Request</ng-template>
+
+                    <div fxFlex="1 0 auto" fxLayout="row">
+
+                        <mat-form-field fxFlex="100" class="col-md-4">
+                            <input readonly matInput placeholder="Available Amount for Factoring" formControlName="availableforFactoring" required>
+
+                        </mat-form-field>
+
+                        <mat-form-field fxFlex="100" class="col-md-4">
+                            <input matInput placeholder="Requested Amount" formControlName="fundReq" type="number" class="scmnum" min="0" max="{{maxValue}}"
+                                required>
+
+                        </mat-form-field>
+
+
+
+                    </div>
+
+                    <div class="pt-24" fxLayout="row" fxLayoutAlign="center center">
+                        <button class="mr-8" mat-raised-button matStepperPrevious type="button" color="accent">
+                            Previous
+                        </button>
+                        <button mat-raised-button matStepperNext type="button" color="accent">
+                            Next
+                        </button>
+                    </div>
+                </form>
+
+
+            </mat-step> -->
+
+            <mat-step>
+
+                <form fxLayout="column" [formGroup]="AccountDetails">
+
+                    <ng-template matStepLabel>Account Details</ng-template>
+
+                    <div fxFlex="1 0 auto" fxLayout="row">
+                        <mat-form-field fxFlex="100" class="col-md-4">
+                            <mat-select formControlName="accountNo" placeholder="Account No" (selectionChange)="showDummyData()">
+                                <mat-option *ngFor="let accountNo of accounts" [value]="accountNo.id">
+                                    {{accountNo.name}}
+                                </mat-option>
+                            </mat-select>
+                            <mat-error>
+                                Account No is required
+                            </mat-error>
+                        </mat-form-field>
+
+                        <mat-form-field fxFlex="100" class="col-md-4">
+                            <input matInput placeholder="Account Name" formControlName="accountName" >
+
+                        </mat-form-field>
+
+                        <mat-form-field fxFlex="100" class="col-md-4">
+                            <input readonly matInput placeholder="Bank Name" formControlName="bankName" required>
+
+                            <mat-error>Bank Name is required!</mat-error>
+                        </mat-form-field>
+
+                    </div>
+
+                    <div fxFlex="1 0 auto" fxLayout="row">
+                        <mat-form-field fxFlex="100" class="col-md-4">
+                            <input readonly matInput placeholder="Branch Name" formControlName="branchName" required>
+
+                            <mat-error>Account name is required!</mat-error>
+                        </mat-form-field>
+
+                        <mat-form-field fxFlex="100" class="col-md-4">
+                            <mat-select formControlName="paymentMode" placeholder="Mode of Payment">
+                                <mat-option *ngFor="let paymentMode of paymentModes" [value]="paymentMode.id">
+                                    {{paymentMode.name}}
+                                </mat-option>
+                            </mat-select>
+                            <mat-error>
+                                Mode of Payment is required
+                            </mat-error>
+                        </mat-form-field>
+
+                        <mat-form-field fxFlex="100" class="col-md-4">
+                            <input matInput placeholder="Requested Amount" formControlName="fundReq" required>
+
+                            <mat-error>Requested amount is required!</mat-error>
+                        </mat-form-field>
+                    </div>
+
+                    <div fxFlex="1 0 auto" fxLayout="row">
+                        <mat-form-field fxFlex="100" class="col-md-4">
+                            <input matInput placeholder="Refund from Collection" formControlName="refundCollection" required>
+
+                            <mat-error>Refund from collection is required!</mat-error>
+                        </mat-form-field>
+
+                        <mat-form-field fxFlex="100" class="col-md-4">
+                            <input matInput placeholder="Amount from Factoring" formControlName="amtFrmFact" required>
+
+                            <mat-error>Amount from factoring is required!</mat-error>
+                        </mat-form-field>
+
+                        <mat-form-field fxFlex="100" class="col-md-4">
+                            <input matInput placeholder="Total Amount" formControlName="totAmt" required>
+
+                            <mat-error>Total amount is required!</mat-error>
+                        </mat-form-field>
+                    </div>
+                    <div class="pt-24" fxLayout="row" fxLayoutAlign="center center">
+                        <button class="mr-8" mat-raised-button matStepperPrevious type="button" color="accent">
+                            Previous
+                        </button>
+                        <button mat-raised-button matStepperNext type="button" color="accent">
+                            Next
+                        </button>
+                    </div>
+                </form>
+            </mat-step>
+
+
+            <mat-step>
+
+                <form fxLayout="column">
+
+                    <ng-template matStepLabel>Invoice Details</ng-template>
+
+                    <!-- <div fxFlex="1 0 auto" fxLayout="row"> -->
+
+                    <!--  -->
+                    <!-- <div class="mat-elevation-z8"> -->
+                    <invoice-details-table></invoice-details-table>
+                    <!-- </div> -->
+                    <!-- </div> -->
+
+                    <div class="pt-24" fxLayout="row" fxLayoutAlign="center center">
+                        <button class="mr-8" mat-raised-button matStepperPrevious type="button" color="accent">
+                            Previous
+                        </button>
+                        <button mat-raised-button matStepperNext type="button" color="accent">
+                            Next
+                        </button>
+                    </div>
+                </form>
+
+
+            </mat-step>
+
+
+            <!-- <mat-step>
+
+                <form fxLayout="column" [formGroup]="SummaryDetails">
+
+                    <ng-template matStepLabel>Fund Request</ng-template>
+
+                    <div fxFlex="1 0 auto" fxLayout="row">
+
+                        <mat-form-field fxFlex="100">
+                            <input readonly matInput placeholder="status" formControlName="summary" required>
+
+                            <mat-error>Summary Details is required!</mat-error>
+                        </mat-form-field>
+
+                    </div>
+
+                    <div class="pt-24" fxLayout="row" fxLayoutAlign="center center">
+                        <button class="mr-8" mat-raised-button matStepperPrevious type="button" color="accent">
+                            Previous
+                        </button>
+                        <button mat-raised-button matStepperNext type="button" color="accent">
+                            Next
+                        </button>
+                    </div>
+                </form>
+
+
+            </mat-step> -->
+
+
+
+
+            <!-- <mat-step>
+
+                <ng-template matStepLabel>Finish</ng-template>
+
+                <div class="h2 m-16" fxLayout="row" fxLayoutAlign="center center">
+                    Thank your for filling out our form.
+                </div>
+
+                <div class="pt-24" fxLayout="row" fxLayoutAlign="center center">
+                    <button class="mr-8" mat-raised-button matStepperPrevious type="button" color="accent">
+                        Previous
+                    </button>
+                    <button mat-raised-button type="button" color="accent" (click)="finishVerticalStepper(this.ManufacturerDetails, this.ApprovedLimitsDetails, this.CurrentPositionDetails, this.OverdueStatusDetails, this.DebtorLimitStatusDetails, this.SummaryDetails)">
+                        Finish
+                    </button>
+                </div>
+
+            </mat-step> -->
+
+        </mat-vertical-stepper>
+    </div>
+
+
+</div>

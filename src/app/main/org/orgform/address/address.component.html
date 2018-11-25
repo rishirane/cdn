@@ -1,0 +1,62 @@
+<div [formGroup]="AddressForm" *ngIf="productPageType">
+    <div class="rowb">
+        <mat-form-field class="col-md-4">
+            <mat-select formControlName="addressTypeId" placeholder="Address Type">
+                <mat-option *ngFor="let addressType of typeOfAddrs" [value]="addressType.id">
+                    {{addressType.name}}
+                </mat-option>
+            </mat-select>
+            <mat-error>
+                Address Type is required
+            </mat-error>
+        </mat-form-field>
+        <mat-form-field class="col-md-4">
+            <textarea rows=1 matInput placeholder="Address Line 1" formControlName="addressLine1"></textarea>
+            <mat-error>
+                Address is required
+            </mat-error>
+        </mat-form-field>
+        <mat-form-field class="col-md-4">
+            <textarea rows=1 matInput placeholder="Address Line 2" formControlName="addressLine2"></textarea>
+            <mat-error>
+                Address is required
+            </mat-error>
+        </mat-form-field>
+    </div>
+
+    <div class="rowb">
+        <mat-form-field class="col-md-4">
+            <mat-select formControlName="divisionId" placeholder="Division">
+                <mat-option *ngFor="let division of divisions" [value]="division.id">
+                    {{division.name}}
+                </mat-option>
+            </mat-select>
+            <mat-error>
+                Division is required
+            </mat-error>
+        </mat-form-field>
+        <mat-form-field class="col-md-4">
+            <mat-select formControlName="districtId" placeholder="District">
+                <mat-option *ngFor="let district of districts" [value]="district.id">
+                    {{district.name}}
+                </mat-option>
+            </mat-select>
+            <mat-error>
+                District is required
+            </mat-error>
+        </mat-form-field>
+        <mat-form-field class="col-md-4">
+            <mat-select formControlName="thanaId" placeholder="Thana">
+                <mat-option *ngFor="let thana of thanas" [value]="thana.id">
+                    {{thana.name}}
+                </mat-option>
+            </mat-select>
+            <mat-error>
+                Thana is required
+            </mat-error>
+        </mat-form-field>
+        <div class="col-md-4">
+            <mat-checkbox formControlName="isMailingAddress" >Check if this is your mailing address</mat-checkbox>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,234 @@
+<div id="product" class="page-layout carded fullwidth inner-scroll">
+
+    <!-- TOP BACKGROUND -->
+    <div class="top-bg accent"></div>
+    <!-- / TOP BACKGROUND -->
+
+    <!-- CENTER -->
+    <div class="center">
+
+        <!-- HEADER -->
+        <div class="header accent" fxLayout="row" fxLayoutAlign="space-between center">
+
+            <!-- APP TITLE -->
+            <div fxLayout="row" fxLayoutAlign="start center">
+
+                <button mat-icon-button class="mr-0 mr-sm-16" [routerLink]="'/challans'">
+                    <mat-icon>arrow_back</mat-icon>
+                </button>
+
+                <!-- <div class="product-image mr-8 mr-sm-16" [@animate]="{value:'*',params:{delay:'50ms',scale:'0.2'}}">
+                    <img *ngIf="product.images[0]" [src]="product.images[0].url">
+                    <img *ngIf="!product.images[0]" [src]="'assets/images/ecommerce/product-image-placeholder.png'">
+                </div> -->
+
+                <div fxLayout="column" fxLayoutAlign="start start" [@animate]="{value:'*',params:{delay:'100ms',x:'-25px'}}">
+                    <div class="logo-text h1 secondary-text" *ngIf="pageType ==='edit'">
+                        Update Challan
+                    </div>
+                    <div class="logo-text h1 secondary-text" *ngIf="pageType ==='new'">
+                        Add Challan
+                    </div>
+                    <!-- <div class="subtitle secondary-text">
+                        <span>Product Detail</span>
+                    </div> -->
+                </div>
+            </div>
+            <!-- / APP TITLE -->
+
+            <div fxLayout="row" fxLayoutAlign="start center">
+                <button mat-raised-button class="save-product-button mr-12" *ngIf="pageType ==='new' || pageType ==='draft'" (click)="saveChallan()">
+                    <span>Save</span>
+                </button>
+
+                <button mat-raised-button  class="save-product-button mr-12" [disabled]="validateForm()" (click)="submitChallan()">
+                    <span>Submit</span>
+                </button>
+
+            </div>
+        </div>
+        <!-- / HEADER -->
+
+        <!-- CONTENT CARD -->
+        <div class="content-card">
+
+            <!-- CONTENT -->
+            <div class="content">
+                <div id="challan-form" [@animate]="{value:'*',params:{duration:'300ms',y:'100px'}}">
+                    <form name="ChallanForm" [formGroup]="ChallanForm" novalidate
+                        class="product w-100-p" fxLayout="column" fxFlex>
+
+                        <mat-tab-group>
+
+                            <mat-tab label="Challan Details">
+
+                                <div class="tab-content p-24" fusePerfectScrollbar>
+
+                                    <div class="rowb">
+                                        <mat-form-field class="col-md-4">
+                                            <mat-label>{{'Challan.SN' | translate}}</mat-label>
+                                            <input  matInput placeholder="{{'Challan.SN' | translate}}"
+                                                formControlName="supplier">
+                                           
+                                            <mat-error>
+                                                {{'Challan.SN' | translate}} {{'Challan.IR' | translate}}
+                                            </mat-error>
+                                        </mat-form-field>
+
+                                        <mat-form-field class="col-md-4">
+                                            <input  formControlName="challanDate"
+                                                matInput [matDatepicker]="challanDate" placeholder="{{'Challan.CD' | translate}}">
+                                            <mat-datepicker-toggle matSuffix [for]="challanDate"></mat-datepicker-toggle>
+                                            <mat-datepicker color="accent" #challanDate></mat-datepicker>
+                                            <mat-error>
+                                                {{'Challan.CD' | translate}} {{'Challan.IR' | translate}}
+                                            </mat-error>
+
+                                        </mat-form-field>
+
+                                        <mat-form-field class="col-md-4">
+                                            <input  matInput placeholder="{{'Challan.ChlNo' | translate}}"
+                                                formControlName="challanNumber">
+                                            <mat-error>
+                                                {{'Challan.ChlNo' | translate}} {{'Challan.IR' | translate}}
+                                            </mat-error>
+                                        </mat-form-field>
+
+                                    </div>
+                                    <div class="rowb">
+                                        <mat-form-field class="col-md-4">
+                                            
+                                            <mat-select  *ngIf="mode=='edit'" formControlName="manufacturerId"
+                                                placeholder="{{'Challan.Manf' | translate}}">
+                                                <mat-option *ngFor="let mname of mnames" [value]="mname.id">
+                                                    {{mname.orgName}}
+                                                </mat-option>
+                                            </mat-select>
+                                            <mat-error>
+                                                {{'Challan.Manf' | translate}} {{'Challan.IR' | translate}}
+                                            </mat-error>
+                                            <input  *ngIf="mode=='view'" matInput placeholder="{{'Challan.Manf' | translate}}"
+                                                formControlName="manufacturer">
+                                        </mat-form-field>
+
+                                        
+
+                                        <mat-form-field class="col-md-4">
+                                            <textarea rows=1 matInput placeholder="{{'Challan.ManfAddr' | translate}}"
+                                                formControlName="manufacturersAddress"></textarea>
+                                            <mat-error>
+                                                {{'Challan.ManfAddr' | translate}} {{'Challan.IR' | translate}}
+                                            </mat-error>
+                                        </mat-form-field>
+
+                                    </div>
+                                    
+                                </div>
+                                <div *ngIf="mode=='view'" class="readonlydiv"></div>
+                            </mat-tab>
+                            
+                            <mat-tab  label="Product Details">
+                                <div class="tab-content p-24" fusePerfectScrollbar>
+                                   
+                                    <div class="rowb posnrelative">
+                                        <mat-form-field class="col-md-3">
+                                            <mat-select  *ngIf="mode=='edit'" readonly="editFieldsReadOnly" [compareWith]="compareIds" formControlName="poNumberId" placeholder="{{'Challan.PONo' | translate}}">
+                                                <mat-option value="noPo">Without PO</mat-option>
+                                                <mat-option *ngFor="let po of purchaseOrders" [value]="po.id">
+                                                    {{po.poNumber}}
+                                                </mat-option>
+                                            </mat-select>
+                                            <mat-error>
+                                                {{'Challan.PONo' | translate}} {{'Challan.IR' | translate}}
+                                            </mat-error>
+                                            <input [readonly]="editFieldsReadOnly" *ngIf="mode=='view'" matInput placeholder="{{'Challan.PONo' | translate}}"
+                                            formControlName="poNumber">
+
+                                        </mat-form-field>
+
+                                        <mat-form-field class="col-md-3" *ngIf="noPoDetails">
+                                            <input [readonly]="editFieldsReadOnly" formControlName="poDate" matInput
+                                                [matDatepicker]="poDate" placeholder="{{'Challan.PODt' | translate}}">
+                                            <mat-datepicker-toggle matSuffix [for]="poDate"></mat-datepicker-toggle>
+                                            <mat-datepicker color="accent" #poDate></mat-datepicker>
+                                            <mat-error>
+                                                {{'Challan.PODt' | translate}} {{'Challan.IR' | translate}}
+                                            </mat-error>
+
+                                        </mat-form-field>
+
+                                        <mat-form-field class="col-md-3"  *ngIf="noPoDetails">
+                                            <input [readonly]="editFieldsReadOnly" matInput placeholder="{{'Challan.DA' | translate}}"
+                                                formControlName="deliveryAddress">
+                                            <mat-error>
+                                                {{'Challan.DA' | translate}} {{'Challan.IR' | translate}}
+                                            </mat-error>
+                                        </mat-form-field>
+                                        <div class="col-md-3 mt-24">
+                                            <mat-checkbox formControlName="finalChallan">Final Challan</mat-checkbox>
+                                        </div>
+                                        <div *ngIf="mode=='view'" class="readonlydiv"></div>
+                                    </div>
+                                    
+                                    <childlist-table #productlisttable [tableConfig]="childTableConfig" [data]="products"
+                                        [ChildItem]="productItem" (valueChange)="handleValueChange($event)"></childlist-table>
+                                </div>
+                            </mat-tab>
+
+
+                            <mat-tab label="Details">
+                                <div class="tab-content p-24" fusePerfectScrollbar>
+
+                                    <div class="rowb posnrelative">
+                                        <mat-form-field class="col-md-4">
+                                            <input matInput placeholder="{{'Challan.PrdBy' | translate}}"
+                                                formControlName="preparedBy">
+                                            <mat-error>
+                                                {{'Challan.PrdBy' | translate}} {{'Invoice.IR' | translate}}
+                                            </mat-error>
+                                        </mat-form-field>
+
+                                        <mat-form-field class="col-md-4">
+                                            <input matInput placeholder="{{'Challan.Dsgn' | translate}}"
+                                                formControlName="designation">
+                                            <mat-error>
+                                                {{'Challan.Dsgn' | translate}} {{'Invoice.IR' | translate}}
+                                            </mat-error>
+                                        </mat-form-field>
+
+
+                                        <mat-form-field class="col-md-4">
+                                            <input formControlName="deliveryDate" matInput
+                                                [matDatepicker]="dlyDate" placeholder="{{'Challan.dlyDt' | translate}}">
+                                            <mat-datepicker-toggle matSuffix [for]="dlyDate"></mat-datepicker-toggle>
+                                            <mat-datepicker color="accent" #dlyDate></mat-datepicker>
+                                            <mat-error>
+                                                {{'Challan.dlyDt' | translate}} {{'Challan.IR' | translate}}
+                                            </mat-error>
+
+                                        </mat-form-field>
+                                        <div *ngIf="mode=='view'" class="readonlydiv"></div>
+                                    </div>
+
+
+
+                                </div>
+                            </mat-tab>
+
+
+
+
+
+                        </mat-tab-group>
+                    </form>
+
+                </div>
+            </div>
+            <!-- / CONTENT -->
+
+        </div>
+        <!-- / CONTENT CARD -->
+
+    </div>
+    <!-- / CENTER -->
+</div>

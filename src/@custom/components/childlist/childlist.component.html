@@ -1,0 +1,112 @@
+<div class="content-card pl-24 pr-24 childtable">
+    <div class="toolbar my-12">
+
+        <div *ngIf="childPageType==='list'" class="todo-selection m-12" fxFlex="row" fxLayoutAlign="end center">
+
+            <button mat-raised-button (click)="onIconClick($event,'add','Add')" color="accent" type="button">
+                + Add
+            </button>
+        </div>
+
+
+        <div *ngIf="childPageType!=='list'" class="content-header m-12 w-100-p">
+
+            <button class="btn-back" mat-raised-button mat-icon-button (click)="onIconClick($event,'back','Back')">
+                <mat-icon class="secondary-text">arrow_back</mat-icon>
+            </button>
+
+            <button class="btn-save" *ngIf="_ChildItem.getValue()" matRipple mat-raised-button (click)="onIconClick($event,'save','Save')"
+                color="accent" type='button'>
+                Save
+            </button>
+
+        </div>
+    </div>
+
+    <div class="example-container todo-content">
+
+        <mat-table *ngIf="childPageType==='list'" [dataSource]="dataSource">
+
+            <ng-container *ngFor="let column of columns" [matColumnDef]="column.columnDef" [ngSwitch]="column.coloumnType">
+
+                <ng-container *ngIf="column.isToShow">
+                    <mat-header-cell *matHeaderCellDef>{{ column.header }}</mat-header-cell>
+                    
+                    <ng-container *ngIf="(column.columnVal==='ValueColumn')">
+                        <!-- <ng-container *ngIf="(column.coloumnType==='amount')">
+                            <mat-cell *matCellDef="let row" class="mat-amount-cell">{{ column.cell(row) | SCM_Currency }}</mat-cell>
+                        </ng-container>
+                        <ng-container *ngIf="(column.coloumnType!=='amount')">
+                            <mat-cell *matCellDef="let row">{{ column.cell(row)}}</mat-cell>
+                        </ng-container> -->
+                        <ng-container *ngSwitchCase="'amount'">
+                            <mat-cell *matCellDef="let row" class="mat-amount-cell">{{ column.cell(row) | SCM_Currency }}</mat-cell>
+                        </ng-container>
+                        <ng-container *ngSwitchCase="'date'">
+                            <mat-cell *matCellDef="let row"> {{ column.cell(row) | SCM_Date }}</mat-cell>
+                        </ng-container>
+                        <ng-container *ngSwitchCase="'value'">
+                            <mat-cell *matCellDef="let row">{{ column.cell(row) }}</mat-cell>
+                        </ng-container>
+                        <ng-container *ngSwitchCase="'status'">
+                            <mat-cell *matCellDef="let row">
+                                <p [ngClass]="{ 'purple-300': (column.cell(row)==='Issued'), 'blue-500': (column.cell(row)==='New'),'orange-500': (column.cell(row)==='Draft'),'green-500' : (column.cell(row)==='Accepted'), 'red-300' : (column.cell(row)==='Rejected'),'red-900' : (column.cell(row).indexOf('Rejected By')!=-1) , 'status':true, 'text-truncate':true, 'h6':true, 'p-4':true}">{{ column.cell(row) }}</p>
+                            </mat-cell>
+                        </ng-container>
+                        <ng-container *ngIf="tableConfig.hasFooter">
+                            <mat-footer-cell *matFooterCellDef>{{column.totalHeaderColText}}</mat-footer-cell>
+                        </ng-container>
+                    </ng-container>
+
+
+                    <ng-container *ngIf="(column.columnVal==='ActionColoumn')">
+                        <mat-cell *matCellDef="let row">
+                            <button type="button" mat-icon-button [matMenuTriggerFor]="moreMenu" aria-label="More"
+                                (click)="$event.stopPropagation()" fxHide.xs>
+                                <mat-icon class="secondary-text">more_vert</mat-icon>
+                            </button>
+                            <mat-menu #moreMenu="matMenu">
+                                <ng-container *ngFor="let columnAction of column.columnActionsButtons">
+                                    <button type="button" mat-menu-item aria-label="toggle done" (click)="onIconClick($event,columnAction.url,row.id)">
+                                        <mat-icon>{{columnAction.btnIcon}}</mat-icon>
+                                        <span>{{columnAction.btnName}}</span>
+                                    </button>
+
+                                </ng-container>
+                            </mat-menu>
+
+                        </mat-cell>
+                        <ng-container *ngIf="tableConfig.hasFooter">
+                            <mat-footer-cell *matFooterCellDef>{{column.totalHeaderColText}}</mat-footer-cell>
+                        </ng-container>
+                    </ng-container>
+
+
+                    <ng-container *ngIf="(column.columnVal==='TotalColumn')">
+                        <ng-container *ngIf="(column.coloumnType==='amount')">
+                            <mat-cell *matCellDef="let row" class="mat-amount-cell">{{ column.cell(row) | SCM_Currency
+                                }}</mat-cell>
+                        </ng-container>
+                        <ng-container *ngIf="(column.coloumnType!=='amount')">
+                            <mat-cell *matCellDef="let row">{{ column.cell(row)}}</mat-cell>
+                        </ng-container>
+                        <ng-container *ngIf="tableConfig.hasFooter">
+                            <mat-footer-cell *matFooterCellDef>
+                                <div class="w-100-p">{{getTotalCost(column.columnDef)}}</div>
+                            </mat-footer-cell>
+                        </ng-container>
+                    </ng-container>
+                    
+                </ng-container>
+            </ng-container>
+            <mat-header-row *matHeaderRowDef="displayedColumns; sticky:true"></mat-header-row>
+            <mat-row *matRowDef="let row; columns: displayedColumns;" (click)="onIconClick($event,'edit',row.id)"></mat-row>
+            <ng-container *ngIf="tableConfig.hasFooter">
+                <mat-footer-row *matFooterRowDef="displayedColumns; sticky: true"></mat-footer-row>
+            </ng-container>
+        </mat-table>
+        <ng-template #dynamicComponent></ng-template>
+    </div>
+
+
+</div>

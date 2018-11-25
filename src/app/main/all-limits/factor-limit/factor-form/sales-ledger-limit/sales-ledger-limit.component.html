@@ -1,0 +1,55 @@
+<div [formGroup]="FOLimitForm" *ngIf="productPageType">
+    <div class="rowb">
+        <mat-form-field class="col-md-4">
+            <mat-select matInput placeholder="Manufacturer" formControlName="manufacturerName">
+                <mat-option *ngFor="let orgName of organisation" [value]="orgName.orgName">
+                    {{orgName.orgName}}
+                </mat-option>
+            </mat-select>
+            <mat-error> Manufacturer is required
+            </mat-error>
+        </mat-form-field>
+        <amount-component [control]="FOLimitForm.controls['salesLedgerLimit']" 
+        [wrapper_class]="'col-md-4'"
+        [errorMsg]="'Credit Limit is required'"
+        [placeHolder]="'Credit Limit'"> 
+    </amount-component>
+        <mat-form-field class="col-md-4">
+            <input matInput placeholder="Advance Payment Rate(%)" type="number" (input)="permitterLimit($event.target.value)" formControlName="advPaymentRate"
+                required>
+            <mat-error>
+                Advance Payment Rate is required
+            </mat-error>
+        </mat-form-field>
+    </div>
+    <div class="rowb">
+        <mat-form-field class="col-md-4">
+            <input [readonly]="isReadOnly" *ngIf="mode=='view'" matInput formControlName="permittedCreditLimit" type="number" placeholder="Permitted Credit Limit" required>
+            <mat-error>
+                Permitted Credit Limit is required
+            </mat-error>
+        </mat-form-field>
+        <mat-form-field class="col-md-4">
+            <input matInput formControlName="salesCreditPeriod" type="number" placeholder="Credit Period" required>
+            <mat-error>
+                Credit Period is required
+            </mat-error>
+        </mat-form-field>
+        <mat-form-field class="col-md-4">
+            <input matInput formControlName="salesGracePeriod" type="number" placeholder="Grace Period" required>
+            <mat-error>
+                Grace Period is required
+            </mat-error>
+        </mat-form-field>
+    </div>
+    <div class="rowb">
+        <mat-form-field class="col-md-4">
+            <input matInput formControlName="maxDays" type="number" placeholder="Maximum days
+                    allowable in Past Due" required>
+            <mat-error>
+                Maximum days allowable in Past Due is required
+            </mat-error>
+        </mat-form-field>
+    </div>
+
+</div>

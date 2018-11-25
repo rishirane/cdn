@@ -1,0 +1,41 @@
+<div id="product" class="page-layout carded fullwidth inner-scroll">
+    <!-- TOP BACKGROUND -->
+    <div class="top-bg accent"></div>
+    <!-- / TOP BACKGROUND -->
+
+    <!-- CENTER -->
+    <div class="center">
+        <br>
+        <!-- HEADER -->
+        <div class="header accent" fxLayout="row" fxLayoutAlign="space-between center">
+                <div fxLayout="row" fxLayoutAlign="start center">
+    
+                    <button mat-icon-button class="mr-0 mr-sm-16" [routerLink]="'/WOLimitFacilityDefinition'">
+                        <mat-icon>arrow_back</mat-icon>
+                    </button>
+                    <div fxLayout="column" fxLayoutAlign="start start" [@animate]="{value:'*',params:{delay:'100ms',x:'-25px'}}">
+                        <div class="logo-text h1 secondary-text" *ngIf="pageType ==='edit'">
+                            Update  Facility Definition
+                        </div>
+                        <div class="logo-text h1 secondary-text" *ngIf="pageType ==='new'">
+                            New Facility Definition
+                        </div>
+                    </div>
+                </div>
+                <div fxLayout="row" fxLayoutAlign="start start">
+                        <button mat-raised-butflimitton class="save-product-button mr-12" *ngIf="pageType ==='new' || pageType ==='draft'"
+                        (click)="saveWOFacility()">
+                        <span>Save</span>
+                    </button>
+                    <button mat-raised-button class="save-product-button mr-12" [disabled]="!validateform()" 
+                        (click)="submitWOFacility()">
+                        <span>Submit</span>
+                    </button>
+                </div>
+
+            </div>
+            <!-- / HEADER -->
+
+            <app-work-order-limit #foFacilityLimittable [data]="flimit"></app-work-order-limit>
+            </div>
+            </div>

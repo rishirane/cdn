@@ -1,0 +1,64 @@
+<div [formGroup]="CompanyForm" *ngIf="productPageType">
+  <div class="rowb">
+    <mat-form-field class="col-md-4">
+      <mat-select formControlName="registrationTypeId" placeholder="Registration Type">
+        <mat-option *ngFor="let registrationType of typeofReg" [value]="registrationType.id">
+          {{registrationType.name}}
+        </mat-option>
+      </mat-select>
+      <mat-error>
+        Registration Type is required
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field class="col-md-4">
+      <input matInput placeholder="Registration Number" formControlName="regNo">
+      <mat-error>
+        Registration Number is required
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field class="col-md-4">
+      <input formControlName="regDate" matInput [matDatepicker]="regDate" placeholder="Registration Date">
+      <mat-datepicker-toggle matSuffix [for]="regDate"></mat-datepicker-toggle>
+      <mat-datepicker color="accent" #regDate></mat-datepicker>
+      <mat-error>
+        Registration Date is required
+      </mat-error>
+    </mat-form-field>
+  </div>
+
+  <div class="rowb">
+    <mat-form-field class="col-md-4">
+      <mat-select formControlName="issuingCountryId" placeholder="Issuing Country">
+        <mat-option *ngFor="let issuingCountry of countries" [value]="issuingCountry.id">
+          {{issuingCountry.name}}
+        </mat-option>
+      </mat-select>
+      <mat-error>
+        Registration Type is required
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field class="col-md-4">
+      <mat-select formControlName="issuingOfficeId" placeholder="Issuing Office">
+        <mat-option *ngFor="let issuingOffice of offices" [value]="issuingOffice.id">
+          {{issuingOffice.name}}
+        </mat-option>
+      </mat-select>
+      <mat-error>
+        Registration Type is required
+      </mat-error>
+    </mat-form-field>
+  </div>
+  <div class="rowb">
+    <div class="col-md-4 mt-24">
+      <mat-checkbox formControlName="hasValidity">Has validity</mat-checkbox>
+    </div>
+    <mat-form-field class="col-md-4" *ngIf="showExpDt">
+      <input formControlName="expiryDate" matInput [matDatepicker]="expiryDate" placeholder="Expiry Date">
+      <mat-datepicker-toggle matSuffix [for]="expiryDate"></mat-datepicker-toggle>
+      <mat-datepicker color="accent" #expiryDate></mat-datepicker>
+      <mat-error>
+        Expiry Date is required
+      </mat-error>
+    </mat-form-field>
+  </div>
+</div>

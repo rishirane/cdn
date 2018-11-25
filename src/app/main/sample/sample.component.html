@@ -1,0 +1,100 @@
+<div class="page-layout blank p-24" fusePerfectScrollbar>
+
+    <h2>{{'SAMPLE.HELLO' | translate}} ABC</h2>
+
+    <div class="vertical-stepper-wrapper">
+
+        <!-- VERTICAL STEPPER EXAMPLE -->
+        <mat-vertical-stepper class="mat-elevation-z4" [linear]="true">
+
+
+            <mat-step [stepControl]="verticalStepperStep1">
+
+                <form fxLayout="column" [formGroup]="verticalStepperStep1">
+
+                    <ng-template matStepLabel>Fill out your name</ng-template>
+
+                    <div fxFlex="1 0 auto" fxLayout="column">
+
+                        <mat-form-field fxFlex="100">
+                            <input matInput placeholder="First name" formControlName="firstName" required>
+                            <mat-error>First Name is required!</mat-error>
+                        </mat-form-field>
+
+                        <mat-form-field fxFlex="100">
+                            <input matInput placeholder="Last name" formControlName="lastName" required>
+                            <mat-error>Last Name is required!</mat-error>
+                        </mat-form-field>
+
+                    </div>
+
+                    <div class="pt-24" fxLayout="row" fxLayoutAlign="center center">
+                        <button mat-raised-button matStepperNext type="button" color="accent">
+                            Next
+                        </button>
+                    </div>
+                </form>
+
+            </mat-step>
+
+
+
+            <mat-step [stepControl]="verticalStepperStep2">
+
+                <form fxLayout="column" [formGroup]="verticalStepperStep2">
+
+                    <ng-template matStepLabel>Fill out your address</ng-template>
+
+                    <div fxFlex="1 0 auto" fxLayout="row">
+
+                        <mat-form-field fxFlex="100">
+                            <input matInput placeholder="Address" formControlName="address" required>
+                            
+                            <mat-error>Address is required!</mat-error>
+                        </mat-form-field>
+
+                    </div>
+
+                    <div class="pt-24" fxLayout="row" fxLayoutAlign="center center">
+                        <button class="mr-8" mat-raised-button matStepperPrevious type="button" color="accent">
+                            Previous
+                        </button>
+                        <button mat-raised-button matStepperNext type="button" color="accent">
+                            Next
+                        </button>
+                    </div>
+                </form>
+
+
+            </mat-step>
+
+
+
+
+            <mat-step>
+
+                <ng-template matStepLabel>Done</ng-template>
+
+                <div class="h2 m-16" fxLayout="row" fxLayoutAlign="center center">
+                    Thank your for filling out our form.
+                </div>
+
+                <div class="pt-24" fxLayout="row" fxLayoutAlign="center center">
+                    <button class="mr-8" mat-raised-button matStepperPrevious type="button" color="accent">
+                        Previous
+                    </button>
+                    <button mat-raised-button type="button" color="accent" (click)="finishVerticalStepper(this.verticalStepperStep1, this.verticalStepperStep2)">
+                        Finish
+                    </button>
+                </div>
+
+            </mat-step>
+
+        </mat-vertical-stepper>
+    </div>
+
+
+</div>
+
+
+<fuse-search-bar  ></fuse-search-bar>

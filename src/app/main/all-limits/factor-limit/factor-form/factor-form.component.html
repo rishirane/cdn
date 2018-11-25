@@ -1,0 +1,81 @@
+<div id="product" class="page-layout carded fullwidth inner-scroll">
+    <!-- <ngx-loading [show]="loading1" [config]="{ backdropBorderRadius: '14px' }"></ngx-loading> -->
+    <!-- TOP BACKGROUND -->
+    <div class="top-bg accent"></div>
+    <!-- / TOP BACKGROUND -->
+
+    <!-- CENTER -->
+    <div class="center">
+        <!-- HEADER -->
+        <div class="header accent" fxLayout="row" fxLayoutAlign="space-between center">
+
+            <!-- APP TITLE -->
+            <div fxLayout="row" fxLayoutAlign="start center">
+                <button mat-icon-button class="mr-0 mr-sm-16" [routerLink]="'/factoringLimit'">
+                    <mat-icon>arrow_back</mat-icon>
+                </button>
+                <div fxLayout="column" fxLayoutAlign="start start" [@animate]="{value:'*',params:{delay:'100ms',x:'-25px'}}">
+                    <div class="logo-text h1 secondary-text" *ngIf="pageType ==='edit'">
+                        <!-- {{product.name}} -->
+                        Edit Factoring Limit
+                    </div>
+                    <div class="logo-text h1 secondary-text" *ngIf="pageType ==='new'">
+                        Add Factoring Limit
+                    </div>
+                </div>
+            </div>
+            <!-- / APP TITLE -->
+            <div fxLayout="row" fxLayoutAlign="start start">
+                <button mat-raised-button class="save-product-button mr-12" *ngIf="pageType ==='new' || pageType ==='draft'" (click)="saveFactorLimit()">
+                    <span>Save</span>
+                </button>
+                <button mat-raised-button class="save-product-button mr-12" [disabled]="!validateform()" (click)="addFactorLimit()">
+                    <span>Submit</span>
+                </button>
+            </div>
+        </div>
+        <!-- / HEADER -->
+        <!-- CONTENT CARD -->
+        <div class="content-card">
+            <!-- CONTENT -->
+            <div class="content">
+                <!-- Add project Form -->
+                <div id="wo-form" [@animate]="{value:'*',params:{duration:'300ms',y:'100px'}}">
+                    <form fxLayout="column" [formGroup]="factorLimitForm" class="product w-100-p" 
+                        fxFlex>
+                        <mat-tab-group>
+                            <mat-tab label="Facility Definition">
+                                <app-work-order-limit #foFacilityLimittable [data]="fLimit"></app-work-order-limit>
+                            </mat-tab>
+                            <mat-tab label="Sales Ledger Limit Set Up">
+                                <br />
+                                <div class="w-100-p">
+                                    <childlist-table #salesLedgerLimittable [tableConfig]="childTableConfig" [data]="salesLimits" [ChildItem]="fLimitItem"></childlist-table>
+                                </div>
+
+                            </mat-tab>
+                            <mat-tab label="Additional Info">
+                                <mat-form-field class="col-md-4">
+                                    <input matInput placeholder="SND Rate" type ="number" [min]=0 formControlName="SNDRate" required>
+                                    <mat-error>
+                                        SND Rate is required
+                                    </mat-error>
+                                </mat-form-field>
+                                <mat-form-field class="col-md-4">
+                                    <input matInput formControlName="SNDThreshold" type ="number" [min]=0 placeholder="SND Threshold" required>
+                                    <mat-error>
+                                        SND Threshold is required
+                                    </mat-error>
+                                </mat-form-field>
+                            </mat-tab>
+                        </mat-tab-group>
+
+                    </form>
+                </div>
+            </div>
+            <!--/ Add project Form -->
+        </div>
+        <!-- / CONTENT -->
+    </div>
+    <!-- / CENTER -->
+</div>

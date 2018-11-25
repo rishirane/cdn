@@ -1,0 +1,92 @@
+
+.childtable{
+
+  .todo-header {
+    padding: 24px;
+    border-bottom: rgba(0,0,0,.12);
+  
+    .actions {
+        min-width: 88px;
+        display: flex;
+        justify-content: flex-end;
+    }
+  }
+  
+  
+  .todo-content {
+    padding: 24px;
+  
+      .title {
+          font-size: 17px;
+          font-weight: 500;
+      }
+  
+      .tag {
+          font-size: 11px;
+          border-radius: 2px;
+          margin: 8px 4px 0 0;
+          padding: 3px 8px;
+  
+          .tag-color {
+              width: 8px;
+              height: 8px;
+              margin-right: 8px;
+              border-radius: 50%;
+          }
+      }
+  
+      .dates {
+  
+          .mat-form-field {
+              width: auto !important;
+          }
+      }
+  }
+  
+  
+    .example-container {
+      overflow: auto;
+      
+    }
+    mat-header-cell{
+        display: flex;
+        justify-content: center;
+    }
+    mat-footer-row {
+        font-weight: bold;
+    }
+    mat-row {
+          cursor: pointer;
+    }
+    .mat-footer-cell{
+        min-height: 70px;
+    }
+    mat-table{
+        max-height: 250px;
+        border-right: 1px solid rgba(0, 0, 0, 0.12);
+        border-left: 1px solid rgba(0, 0, 0, 0.12);
+    }
+    .mat-table-sticky {
+      border-top: 1px solid #e0e0e0;
+      
+    }
+    mat-cell{
+        display: flex ;
+        justify-content: center;
+    }
+    .mat-amount-cell{
+        display: flex !important;
+        justify-content: flex-end !important;
+    }
+    .content-header{
+        flex-direction: row;
+        .btn-save{
+            float:  right;  
+      }
+    }
+    
+}
+
+
+
+  

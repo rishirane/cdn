@@ -1,0 +1,41 @@
+
+    
+        <div [formGroup]="DOLimitForm" *ngIf="productPageType">
+          <div class="rowb">
+              <mat-form-field class="col-md-4">
+                  <mat-select matInput placeholder="Manufacturer" formControlName="manufacturerName">
+                  <mat-option *ngFor="let orgName of organisation" [value]="orgName.orgName">
+                          {{orgName.orgName}}
+                      </mat-option>
+                      </mat-select>
+                  <mat-error> Manufacturer is required
+                  </mat-error>
+              </mat-form-field>
+              <amount-component [control]="DOLimitForm.controls['demandOrderLimit']" 
+              [wrapper_class]="'col-md-4'"
+              [errorMsg]="'Credit Limit is required'"
+              [placeHolder]="'Credit Limit'"> 
+          </amount-component>
+              <mat-form-field class="col-md-4">
+                      <input matInput placeholder="Advance Payment Rate(%)" type="number" [min]=0 formControlName="advPaymentRate" required>
+                      <mat-error>
+                          Advance Payment Rate is required
+                      </mat-error>
+                  </mat-form-field>
+          </div>
+          <div class="rowb">
+                  <mat-form-field class="col-md-4">
+                      <input matInput formControlName="manufacturerCreditPeriod" type="number" [min]=0 placeholder="Credit Period" required>
+                      <mat-error>
+                          Credit Period is required
+                      </mat-error>
+                  </mat-form-field>
+                  <mat-form-field class="col-md-4">
+                      <input matInput formControlName="manufacturerGracePeriod" type="number" [min]=0 placeholder="Grace Period" required>
+                      <mat-error>
+                          Grace Period is required
+                      </mat-error>
+                  </mat-form-field>
+              </div>
+  </div>
+
