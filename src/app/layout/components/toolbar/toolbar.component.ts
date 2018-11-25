@@ -170,7 +170,7 @@ export class ToolbarComponent implements OnInit, OnDestroy
     logout(): void {
        
         // localStorage.removeItem("token");
-        this.router.navigate(["/auth/login"]);
+        this.router.navigate(["/"]);
         window.location.reload();
     }
 

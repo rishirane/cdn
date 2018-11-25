@@ -29,6 +29,7 @@ const routes: Routes = [
         component: OrganizationsComponent,
         canActivate:[AuthGuard],
         canActivateChild:[AuthGuard],
+        runGuardsAndResolvers: 'always',
         resolve  : {
             data: OrgService,
         }

@@ -35,7 +35,7 @@ const routes: Routes = [
     resolve: {
       data: UserService,
     },
-    runGuardsAndResolvers: 'always',
+   
   },
   {
     path: 'users/:id',
@@ -62,6 +62,7 @@ const routes: Routes = [
     component: UserNotificationComponent,
     canActivate:[AuthGuard],
     canActivateChild:[AuthGuard],
+    runGuardsAndResolvers: 'always',
     resolve: {
       data: UserService,
     },
